@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consumindo APIs</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="script.js"></script>
+</head>
+<body>
+    <div>
+        <h3>API <strong>externa</strong> que retorna preço dólar:</h3>
+        <h4>https://economia.awesomeapi.com.br/last/USD-BRL</h4>
+        <label for="">Moeda: </label><span id="moeda"></span><br>
+        <label for="">Valor: </label><span id="valor"></span>
+    </div>
+    <div>
+        <h3>API <strong>externa</strong> que retorna CEP:</h3>
+        <h4>https://viacep.com.br/ws/01001000/json/</h4>
+        <label for="">Cep: </label><span id="cep"></span><br>
+        <label for="">Rua: </label><span id="rua"></span>
+    </div>
+    <div>
+        <h3>API interna que contém projeto GCM/SAC</h3>
+        <h4>http://localhost:8080/717</h4>
+        <h5>Formato de Objeto para String</h5>
+        Número do GM: <input type="text"  id="numeroGM"><button onclick="getGcm()">OK</button>
+        <div id="renderResults">Dados GCM</div>
+        <h5>Formato Formulário</h5>
+        Nome: <span id="nomeGcm"></span><br>
+        Numero: <span id="numGcm"></span><br>
+        Data Nascimento: <span id="nascGcm"></span><br>
+        CPF: <span id="cpfGcm"></span><br>
+        Email: <span id="emailGcm"></span><br>
+        Data Admissão: <span id="admissGcm"></span>
+
+    </div>
+    
+</body>
+</html>
