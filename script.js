@@ -14,21 +14,18 @@ fetch('https://viacep.com.br/ws/01001000/json/')
         console.log(body) //devolve conteúdo no console
         document.getElementById("cep").innerHTML = body.cep
         document.getElementById("rua").innerHTML = body.logradouro
+        document.getElementById("bairro").innerHTML = body.bairro
     })
 
-//API solicita dados GM/SAC do banco de dados
-
-
-
-
+//API busca dados GM/SAC do banco de dados e apresenta no HTML
 function getGcm(){
     let numGM =  document.getElementById("numeroGM").value
-    console.log(numGM)
+    console.log("número do Guarda: "+numGM) //Visualiza no console o número do GM
     const url = 'http://localhost:8080/'+numGM
     axios.get(url)
     .then(response=> {
         const data = response.data
-        renderResults.textContent = JSON.stringify(data)//transforma de objeto para string
+        renderResults.textContent = JSON.stringify(data)//transforma de objeto JSON para string
         console.log(data) //devolve conteúdo no console
         nomeGcm.textContent = JSON.stringify(data.nome)
         numGcm.textContent = JSON.stringify(data.numero)
@@ -38,8 +35,14 @@ function getGcm(){
         admissGcm.textContent = JSON.stringify(data.dataAdmis)
     })
     .catch(error=> console.log(error))
-}
-//getGcm()
+    //busca idade do GCM
+    fetch('http://localhost:8080/idade/'+numGM)
+        .then(response => {return response.json()})
+        .then(nInteiro => {
+            console.log("idade do GCM: "+nInteiro)
+            document.getElementById("idadeGcm").innerHTML = nInteiro
+        })
+}   
 
 //API de Cadastro de GCM
 function postNewGcm(){
