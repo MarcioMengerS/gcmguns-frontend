@@ -7,14 +7,20 @@ fetch('https://economia.awesomeapi.com.br/last/USD-BRL')
         document.getElementById("moeda").innerHTML = corpo.USDBRL.code
         document.getElementById("valor").innerHTML = corpo.USDBRL.high
     })
+    .catch((error) => {console.log('Catch:', error)})
 //API busca CEP
-fetch('https://viacep.com.br/ws/01001000/json/')
+fetch('https://viacep.com.br/ws/91750210/json/')
     .then(resp => {return resp.json()}) //devolve conteúdo em forma de JSON
     .then(body => {
         console.log(body) //devolve conteúdo no console
         document.getElementById("cep").innerHTML = body.cep
         document.getElementById("rua").innerHTML = body.logradouro
         document.getElementById("bairro").innerHTML = body.bairro
+    })
+    .catch((error) => {
+        console.log('Catch:', error);
+        document.getElementById("cep").innerHTML = "CEP Inválido!"+error.message
+        //document.write("ERRO");
     })
 
 //API busca dados GM/SAC do banco de dados e apresenta no HTML
