@@ -4,26 +4,28 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Consumindo APIs</title>
+    <title>Testes Consumindo APIs</title>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="script.js"></script>
 </head>
 <body>
     <div>
-        <h3>API <strong>externa</strong> que retorna preço dólar:</h3>
-        <h4>Exemplo(https://economia.awesomeapi.com.br/last/USD-BRL)</h4>
+        <h3>API <b>externa</b> que retorna preço dólar:</h3><hr>
+        <h4>Exemplo (https://economia.awesomeapi.com.br/last/USD-BRL)</h4>
+        <span id="nome"></span><br>       
         <label for="">Moeda: </label><span id="moeda"></span><br>
-        <label for="">Valor: </label><span id="valor"></span>
+        <label for="">R$ </label><span id="valor"></span>
     </div>
     <div>
-        <h3>API <strong>externa</strong> que retorna CEP:</h3>
+        <h3>API <b>externa</b> que retorna CEP:</h3><hr>
         <h4>Exemplo(https://viacep.com.br/ws/91790755/json/)</h4>
+        Insira o CEP: <input type="text"  id="cepBuscar"><button onclick="buscarCep()">Buscar</button><br>
         <label for="">Cep: </label><span id="cep"></span><br>
         <label for="">Rua: </label><span id="rua"></span><br>
         <label for="">Bairro: </label><span id="bairro"></span>
     </div>
     <div>
-        <h3>API interna que contém projeto GCM/SAC</h3>
+        <h3>API interna que contém projeto GCM/SAC</h3><hr>
         <h4>Exemplo(http://localhost:8080/717)</h4>
         Número do GM: <input type="text"  id="numeroGM"><button onclick="getGcm()">Buscar</button>
         <h5>Formato de Objeto em String</h5>
