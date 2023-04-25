@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/js/cadastrogcm.js"></script>
+    <title>Cadastro GCM</title>
+</head>
+<body>
+    <h2>Cadastro GCM (http://localhost:8080/gcm)</h2>
+    <div>
+        <h4> Formulário de Cadastro</h4>
+
+        Numero: <input type="number" id="num" placeholder="Numero do gcm"><br>
+        Nome: <input type="text" id="nome" placeholder="Nome completo"><br>
+        CPF: <input type="text" id="cpf" placeholder="Cpf sem pontuação"><br>
+        Data Nascimento: <input type="date" id="dataNasc" placeholder="aaaa-mm-dd"><br>
+        Data Admissão: <input type="date" id="dataAd" placeholder="aaaa-mm-dd"><br>
+        Email: <input type="email" id="email" placeholder="fulano@gmail.com"><br>
+        Cartão: <input type="text" id="tag" name="tagResult"></span>   <button onclick= "connect()">Identificar TAG</button><br>
+    </div>
+    <p>
+        <button onclick="btnCadastro()">Salvar</button>
+        <a href="/listagcms.html"><button>Cancelar</button></a>
+    </p>
+</body>
+</html>
