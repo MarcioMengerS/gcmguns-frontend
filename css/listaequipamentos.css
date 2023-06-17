@@ -8,10 +8,18 @@
 
 body{
     min-height: 100vh;
-    background: #fff;
     font-family: 'Montserrat', sans-serif;
+    background: linear-gradient(#202124 99%, #202124 1%);
 }
 
+.buttoncadastrar{
+    margin-left: 2%;
+    margin-bottom: 5%;
+    width: 90%;
+    height: 50px;
+    border-radius: 10px;
+    background-color: #fff;
+}
 /* side bar styles */
 .sidebar{
     position:fixed;
@@ -21,9 +29,9 @@ body{
     width: 60px;
     border-radius: 10px;
     box-sizing: initial;
-    border-left: 15px solid #a200ca;
-    background: #a200ca;
-    transition: width 1s;
+    border-left: 15px solid #1e00ca;
+    background: #1e00ca;
+    transition: width 0.7s;
     overflow-x: hidden;
 }
 
@@ -49,7 +57,7 @@ body{
 }
 
 .sidebar .list .list-item.active{
-    background: #ffffff;
+    background: #202124;
 }
 
 .sidebar .list .list-item:hover{
@@ -63,7 +71,7 @@ body{
     top: -20px;
     height: 20px;
     width: 100%;
-    background: #fff;
+    background: #202124;
     display: none;
 }
 
@@ -75,7 +83,7 @@ body{
     width: 100%;
     height: 100%;
     border-bottom-right-radius: 20px;
-    background: #a200ca;
+    background: #1e00ca;
 }
 
 .sidebar .list .list-item b:nth-child(2){
@@ -83,7 +91,7 @@ body{
     bottom: -20px;
     height: 20px;
     width: 100%;
-    background: #fff;
+    background: #202124;
     display: none;
 }
 
@@ -95,7 +103,7 @@ body{
     width: 100%;
     height: 100%;
     border-top-right-radius: 20px;
-    background: #a200ca;
+    background: #1e00ca;
 }
 
 .sidebar .list .list-item.active b:nth-child(1),
@@ -104,7 +112,7 @@ body{
 }
 
 .sidebar .list .list-item.active .list-item-link{
-    color: #000;
+    color: #fff;
 }
 
 .sidebar .list .list-item .list-item-link{
@@ -148,7 +156,7 @@ body{
     right: 20px;
     width: 50px;
     height: 50px;
-    background: #a200ca;
+    background: #1e00ca;
     border-radius: 10px;
     cursor: pointer;
     display: flex;
@@ -175,9 +183,10 @@ body{
 .toggle.active i.open, .toggle i.close{
     display: none;
 }
-.wp-content {
+.wp-content{
     margin-top: 20px;
     margin-left: 350px;
+    color: #fff;
 }
 #imgbrasao{
     margin-top: 8%;
