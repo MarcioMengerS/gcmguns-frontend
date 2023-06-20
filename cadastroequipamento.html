@@ -5,9 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/cadastro.css">
-    <title>Cadastro GCM</title>
+    <title> Castastro Equipamento</title>
 </head>
 <body>
+    <a href="/listaequipamentos.html">Lista de Equipamentos</a>
     <div class="background">
         <div class="container">
             <div class="screen">
@@ -26,41 +27,41 @@
                 <div class="screen-body">
                     <div class="screen-body-item left">
                         <div class="app-title">
-                            <span>Cadastro GCM - SAC</span>
+                            <span>Cadastro Equipamento - SAC</span>
                         </div>
                     </div>
                     <div class="screen-body-item">
                         <div class="app-form-group">
-                            <input class="app-form-control" placeholder="NÚMERO" type="number" id="num">
+                            <input class="app-form-control" placeholder="MARCA" type="text" id="brand">
                         </div>
                         <div class="app-form-group">
-                            <input class="app-form-control" placeholder="NOME" type="text" id="nome">
+                            <input class="app-form-control" placeholder="CALIBRE" type="text" id="calibre">
+                        </div>
+                        <!-- <div class="app-form-group">
+                            <input class="app-form-control" placeholder="CATEGORIA" type="text" id="category">
+                        </div> -->
+                        <div class="app-form-group">
+                            <select class="app-form-control" id="category">
+                                <option value="">CATEGORIA</option>
+                                <option value="ALGEMA">ALGEMA</option>
+                                <option value="COLETE">COLETE</option>
+                                <option value="ARMA">ARMA</option>
+                                <option value="MUNICAO">MUNIÇÃO</option>
+                                <option value="ESPARGIDOR">ESPARGIDOR</option>
+                            </select>
                         </div>
                         <div class="app-form-group">
-                            <input class="app-form-control" placeholder="CPF" type="text" id="cpf">
-                        </div>
-                        <div class="app-form-group">
-                            <input class="app-form-control" placeholder="DATA DE NASCIMENTO" type="date" id="dataNasc">
-                        </div>
-                        <div class="app-form-group">
-                            <input class="app-form-control" placeholder="DATA DE ADMISSÃO" type="date" id="dataAd">
-                        </div>
-                        <div class="app-form-group">
-                            <input class="app-form-control" placeholder="EMAIL" type="email" id="email">
-                        </div>
-                        <div class="app-form-group message">
-                            <input class="app-form-control" placeholder="CARTÃO DE IDENTIFICAÇÃO" id="tag" name="tagResult">
+                            <input class="app-form-control" placeholder="NÚMERO" type="number" id="number">
                         </div>
                         <div class="app-form-group buttons">
-                            <button class="app-form-button" onclick="connect()">CADASTRAR CARTÃO</button>
-                            <a href="/listagcms.html"><button class="app-form-button">CANCELAR</button></a>
-                            <button class="app-form-button" onclick="btnCadastro()">SALVAR</button>
+                            <a href="/listaequipamentos.html"><button class="app-form-button">CANCELAR</button></a>
+                            <button class="app-form-button" onclick="cadastroEquipamento()">SALVAR</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <script src="/js/cadastrogcm.js"></script>
+    <script src="/js/cadastroequipamento.js"></script>
 </body>
 </html>

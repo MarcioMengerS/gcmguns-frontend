@@ -1,11 +1,11 @@
-
+var params = window.location.search.substring(4);
 const carregarModal = async() =>{
-    var params = window.location.search.substring(1);
-    console.log(params);
-    var teste = document.getElementById('id_equip');
-    teste.innerHTML = params;
-    teste = params.slice(-1);
-    const response = await fetch('http://localhost:8080/equipment/'+teste);
+    // console.log(params);
+    // var teste = document.getElementById('id_equip');
+    // teste.innerHTML = params;
+    // teste = params.slice(-1);
+    // console.log(teste);
+    const response = await fetch('http://localhost:8080/equipment/'+params);
     const dados = await response.json();
     const modaltitle = document.getElementById('modal_t');
     const modalText = document.getElementsByClassName('modal__text');
@@ -17,3 +17,15 @@ const carregarModal = async() =>{
 }
 
 window.onload = () => {carregarModal();}
+
+function atribuirGcm(){
+    const inputGcm = document.getElementById('input');
+    const init ={
+        method: 'POST',
+        headers:{
+            "Content-Type":'application/json'
+        },
+    }
+    fetch(`http://localhost:8080/loan/${inputGcm.value}/${params}`, init);
+    window.location.href = "/listaequipamentos.html";
+}
