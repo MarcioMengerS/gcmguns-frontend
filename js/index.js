@@ -51,4 +51,8 @@ function getGcm(){
 }
 //API busca total de Guardas Cadastrados no Banco de Dados
 axios.get('http://localhost:8080/gcm/total')
-    .then(response => {total.textContent = JSON.stringify(response.data)})
+    .then(response => {totalGcm.textContent = JSON.stringify(response.data)})
+
+//API busca total de Equipamentos Cadastrados no Banco de Dados
+axios.get('http://localhost:8080/equipment/total')
+    .then(response => {totalEquip.textContent = JSON.stringify(response.data)})
