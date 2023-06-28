@@ -14,6 +14,9 @@ async function carregarGCM() {
     const dataNas = document.getElementById('data-nas');
     const email = document.getElementById('email');
     const tag = document.getElementById('tag');
+    const idade = document.getElementById('age');
+    const contribuicao = document.getElementById('contribution');
+
     nome.value = objeto.nome;
     numero.value = objeto.numero;
     cpf.value = objeto.cpf;
@@ -21,9 +24,11 @@ async function carregarGCM() {
     dataNas.value = objeto.dataNas;
     email.value = objeto.email;
     tag.value = objeto.tag;
+    idade.value = calculaTempo(objeto.dataNas);
+    contribuicao.value = calculaTempo(objeto.dataAdmis)
 }
 
-function editarDados(){
+function desbloquearDados(){
     document.getElementById('nome').removeAttribute('readonly');
     document.getElementById('numero').removeAttribute('readonly');
     document.getElementById('cpf').removeAttribute('readonly');
@@ -52,15 +57,21 @@ async function salvarDados(){
     }
     
     const init ={
-    method: 'PUT',
-    headers:{
-        "Content-Type":'application/json'
-    },
-    body: JSON.stringify(gcm)
+        method: 'PUT',
+        headers:{"Content-Type":'application/json'},
+        body: JSON.stringify(gcm)
     }
     const response = await fetch('http://localhost:8080/gcm/'+numGcm, init);
     //Voltar para página Lista GCM
     window.location.href = "/listagcms.html";
 }
 
+function calculaTempo(data){
+    tempo = Math.floor((Date.now() - new Date(data)) / (31557600000));
+    if(tempo == 1){
+        return tempo+" ano";
+    }else{
+        return tempo+" anos";
+    }
+}
 window.onload = () => {carregarGCM();}

@@ -24,13 +24,30 @@
         
         <p class="modal__text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
         <p class="modal__text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-        <input type="text" id="input" placeholder="Insira nº do GCM">
-        <button class="modal__btn" onclick="atribuirGcm()">Atribuir &rarr;</button>
-    
+        <input type="text" id="input" placeholder="Insira nº GCM" autocomplete="off">
+        <!-- <button class="modal__btn" onclick="atribuirGcm()">Atribuir &rarr;</button> -->
+        <a href="#m2-o"><button class="modal__btn" onclick="identificarGCM()">Atribuir &rarr;</button></a>
+
         <a href="/listaequipamentos.html" class="link-2"></a>
     
       </div>
     </div>
+    <!-- modal solicita cartão de identificação -->
+    <div class="box">
+      <!-- <a href="#m2-o" class="link-1" id="m2-c">Modal 2</a>
+      <p class="box__info">With Background (Opacity .4)</p> -->
+
+      <div class="modal-container" id="m2-o" style="--m-background: hsla(0, 0%, 0%, .4);">
+        <div class="modal2">
+          <h1 class="modal__title">Leitor Ativado</h1>
+          <p class="modal__text">Solicite ao GCM que aproxime cartão do leitor</p>
+          <a id="return"></a>
+          <a href="#modal-opened" class="link-2"></a>
+        </div>
+      </div>
+    </div>
+    <!-- Fim /modal solicita cartão de identificação -->
     <script src="/js/mostraequipamento.js"></script>
+    <script src="/js/atribuirequipamento.js"></script>
 </body>
 </html>

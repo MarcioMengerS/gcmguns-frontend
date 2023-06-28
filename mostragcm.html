@@ -4,20 +4,30 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <link rel="stylesheet" href="/css/listagcms.css"> -->
+    <link rel="stylesheet" href="css/mostragcm.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <title>GCM</title>
 
 </head>
 <body>
-    <a href="/listagcms.html">LISTA GCMS</a>
+    <!-- Menu -->
+    <header>
+        <nav class="navMenu">
+        <a href="/index.html">HOME</a>
+        <a href="/listagcms.html">LISTA GCM</a>
+        <div class="dot"></div>
+        </nav>
+    </header>
     <p id="id_gcm"></p>
-    <div class="container md-3">
-        <h1 class="display-4">Dados GCM</h1>
+    <div class="container-lg">
+        <div class="inline">
+            <h1 class="display-4">Dados GCM</h1>
+            <img src="/images/brasao.png" alt="brasão GCM">
+        </div>
         <hr>
         <form>
             <div class="row mb-4 g-4" class="form-group">
-                <div class="col-7">
+                <div class="col-6">
                     <label for="nome" class="form-label">Nome</label>
                     <input type="text" class="form-control" id="nome" placeholder="Fulano de tal" readonly>
                 </div>
@@ -39,18 +49,26 @@
                     <label for="data-nas" class="form-label">Data Nascimento</label>
                     <input type="date" class="form-control" id="data-nas" placeholder="Data Nas" readonly>
                 </div>
-                <div class="col-6">
+                <div class="col-5">
                     <label for="email" class="form-label">Email</label>
                     <input type="email" class="form-control" id="email" placeholder="Email" readonly>
                 </div>
             </div>
             <div class="row mb-4 g-4"class="form-group">
+                <div class="col-2">
+                    <label for="age">Idade</label>
+                    <input type="text" class="form-control" id="age" name="age" readonly>
+                </div>
+                <div class="col-3">
+                    <label for="contribution">Tempo de Serviço</label>
+                    <input type="text" class="form-control" id="contribution" name="contribution" readonly>
+                </div>
                 <div class="col-4">
-                    <label for="endereco">Cartão de Identificação</label>
-                    <input type="text" class="form-control" id="tag" placeholder="Tag cartão" name="tagResult">
+                    <label for="tag">Cartão de Identificação</label>
+                    <input type="text" class="form-control" id="tag" placeholder="Tag cartão" name="tagResult" readonly>
                 </div>
             </div>
-            <button type="button" class="btn btn-success" onclick="editarDados()">Editar Campos</button>
+            <button type="button" class="btn btn-success" onclick="desbloquearDados()">Editar Campos</button>
             <button type="button" class="btn btn-primary" onclick="salvarDados()">Salvar</button>
             <button type="button" class="btn btn-secondary" onclick= "connect()">Cadastrar Cartão</button>
         </form>

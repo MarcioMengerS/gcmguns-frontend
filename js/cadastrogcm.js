@@ -21,7 +21,7 @@ async function requestPort() {
 // Abre a porta serial e inicia a leitura do cartão
 async function connect() {
   const port = await requestPort();
-  await port.open({ baudRate: 9600 });
+  await port.open({ baudRate: 9600, bufferSize:8 });
   //
   await port.setSignals({ break: false });
 

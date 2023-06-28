@@ -17,15 +17,3 @@ const carregarModal = async() =>{
 }
 
 window.onload = () => {carregarModal();}
-
-function atribuirGcm(){
-    const inputGcm = document.getElementById('input');
-    const init ={
-        method: 'POST',
-        headers:{
-            "Content-Type":'application/json'
-        },
-    }
-    fetch(`http://localhost:8080/loan/${inputGcm.value}/${params}`, init);
-    window.location.href = "/listaequipamentos.html";
-}

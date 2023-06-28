@@ -68,6 +68,19 @@ a:link {
   overflow: hidden;
 }
 
+.modal2 {
+  width: 45rem;
+  padding: 4rem 2rem;
+  border-radius: .8rem;
+
+  color: var(--light);
+  background: var(--background);
+  box-shadow: .4rem .4rem 2.4rem .2rem hsla(236, 50%, 50%, 0.3);
+  position: relative;
+
+  overflow: hidden;
+}
+
 .modal__details {
   text-align: center;
 
