@@ -68,7 +68,7 @@ async function salvarDados(){
 
 function calculaTempo(data){
     tempo = Math.floor((Date.now() - new Date(data)) / (31557600000));
-    if(tempo == 1){
+    if(tempo <= 1){
         return tempo+" ano";
     }else{
         return tempo+" anos";
