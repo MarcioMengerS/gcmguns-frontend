@@ -41,6 +41,9 @@ function listaAlgemas(){
             //Corpo do texto
             const div_body = document.createElement("div");
             div_body.setAttribute("class", "card-body");
+            if(!post.available){
+                div_body.style.backgroundColor = "#fddb3a";
+            }
             //título do card
             const h5_title = document.createElement("h5");
             h5_title.setAttribute("class", "card-title");
@@ -82,8 +85,12 @@ function listaColetes(){
             const div_w75 = document.createElement("div");
             div_w75.setAttribute("class", "card w-75 mb-3"); //estilizar com bootstrap
             console.log(post);
+
             const div_body = document.createElement("div");
             div_body.setAttribute("class", "card-body");
+            if(!post.available){
+                div_body.style.backgroundColor = "#fddb3a";
+            }
 
             const h5_title = document.createElement("h5");
             h5_title.setAttribute("class", "card-title");
@@ -94,10 +101,12 @@ function listaColetes(){
             const a_btn = document.createElement("a");
             a_btn.setAttribute("class", "btn btn-primary");
             a_btn.setAttribute("href", `/mostraequipamento.html?id=${post.id}#modal-opened`);
-
+            
             h5_title.innerHTML = "Marca " + post.brand;
             p_text.innerText = "número: " + post.number;
             a_btn.innerText = "Detalhes";
+
+            console.log(post.available);
 
             div_body.appendChild(h5_title);
             div_body.appendChild(p_text);
