@@ -137,10 +137,10 @@ a:link {
 
 .modal__btn {
   padding: 1rem 1.6rem;
-  border: 1px solid hsla(0, 0%, 100%, .4);
+  border: 2px solid hsla(0, 0%, 100%, .4);
   border-radius: 100rem;
 
-  color: inherit;
+  color: #000;
   background: transparent;
   font-size: 1.4rem;
   font-family: inherit;

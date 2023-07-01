@@ -7,6 +7,7 @@ async function carregarGCM() {
 
     const response = await fetch('http://localhost:8080/gcm/'+numGcm);
     const objeto = await response.json();
+    console.log(objeto);
     const nome = document.getElementById('nome');
     const numero = document.getElementById('numero');
     const cpf = document.getElementById('cpf');
@@ -16,6 +17,7 @@ async function carregarGCM() {
     const tag = document.getElementById('tag');
     const idade = document.getElementById('age');
     const contribuicao = document.getElementById('contribution');
+    const transPass = document.getElementById('pass');
 
     nome.value = objeto.nome;
     numero.value = objeto.numero;
@@ -25,7 +27,8 @@ async function carregarGCM() {
     email.value = objeto.email;
     tag.value = objeto.tag;
     idade.value = calculaTempo(objeto.dataNas);
-    contribuicao.value = calculaTempo(objeto.dataAdmis)
+    contribuicao.value = calculaTempo(objeto.dataAdmis);
+    transPass.value = objeto.transactionPass;
 }
 
 function desbloquearDados(){
@@ -35,6 +38,7 @@ function desbloquearDados(){
     document.getElementById('email').removeAttribute('readonly');
     document.getElementById('data-nas').removeAttribute('readonly');
     document.getElementById('data-ads').removeAttribute('readonly');
+    document.getElementById('pass').removeAttribute('readonly');
 }
 
 async function salvarDados(){
@@ -45,6 +49,7 @@ async function salvarDados(){
     const dataAdmisObj = document.getElementById("data-ads");
     const emailObj = document.getElementById("email");
     const tagObj = document.getElementById('tag');
+    const passObj = document.getElementById('pass');
 
     const gcm = {
         numero: Number(numeroObj.value),
@@ -53,7 +58,8 @@ async function salvarDados(){
         dataNas: dataNascObj.value,
         dataAdmis: dataAdmisObj.value,
         email: emailObj.value,
-        tag: tagObj.value
+        tag: tagObj.value,
+        transactionPassword: passObj.value
     }
     
     const init ={
@@ -79,6 +85,7 @@ async function getEquipamentos(){
     clean.innerHTML="";  //limpa guia equipamentos
     const response = await fetch('http://localhost:8080/loan/gcm_id/'+numGcm)
     const dados = await response.json();
+    console.log(dados);
     dados.forEach(item => {
         const newContainer = document.getElementById('new-container');
         const course = document.createElement('div');

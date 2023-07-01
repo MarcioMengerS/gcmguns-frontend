@@ -13,10 +13,9 @@
     <h2>Mostra Equipamento</h2>
     <p id="id_equip"></p>
     <hr>
-
+    <!-- Modal para atribuir equipamento ao GCM-->
     <div class="modal-container" id="modal-opened">
       <div class="modal">
-    
         <div class="modal__details">
           <h1 class="modal__title" id="modal_t">Modal Title</h1>
           <p class="modal__description">Gostaria de atribuir este equipamento a algum Guarda Civil Metropolitano?</p>
@@ -24,12 +23,10 @@
         
         <p class="modal__text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
         <p class="modal__text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-        <input type="text" id="input" placeholder="Insira nº GCM" autocomplete="off">
-        <!-- <button class="modal__btn" onclick="atribuirGcm()">Atribuir &rarr;</button> -->
-        <a href="#m2-o"><button class="modal__btn" onclick="identificarGCM()">Atribuir &rarr;</button></a>
+        <input type="text" id="input" placeholder="Insira o Número" autocomplete="off">
+        <a href="#m2-o"><button class="modal__btn" onclick="identificarGCM()">Atribuir ao GCM &rarr;</button></a>
 
         <a href="/listaequipamentos.html" class="link-2"></a>
-    
       </div>
     </div>
     <!-- modal solicita cartão de identificação -->
