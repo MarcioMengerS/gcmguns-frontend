@@ -61,7 +61,7 @@ async function salvarDados(){
         headers:{"Content-Type":'application/json'},
         body: JSON.stringify(gcm)
     }
-    const response = await fetch('http://localhost:8080/gcm/'+numGcm, init);
+    await fetch('http://localhost:8080/gcm/'+numGcm, init);
     //Voltar para página Lista GCM
     window.location.href = "/listagcms.html";
 }
@@ -73,5 +73,44 @@ function calculaTempo(data){
     }else{
         return tempo+" anos";
     }
+}
+async function getEquipamentos(){
+    const clean = document.querySelector("#new-container");
+    clean.innerHTML="";  //limpa guia equipamentos
+    const response = await fetch('http://localhost:8080/loan/gcm_id/'+numGcm)
+    const dados = await response.json();
+    dados.forEach(item => {
+        const newContainer = document.getElementById('new-container');
+        const course = document.createElement('div');
+        const coursePreview = document.createElement('div');
+        const h6 = document.createElement('h6');
+        const courseInfo = document.createElement('div');
+        const h6_2 = document.createElement('div');
+        const btn = document.createElement('a');
+
+        course.setAttribute('class', 'course');
+        coursePreview.setAttribute('class', 'course-preview');
+        h6.setAttribute('class', 'name-princ');
+        courseInfo.setAttribute('class', 'course-info');
+        btn.setAttribute('class', 'btn-detalhes');
+
+        btn.href = `/mostraequipamento.html?id=${item.id}#modal-opened`;
+        btn.innerHTML = "Detalhes";
+        //formando data e hora
+        let dataHora = new Date(item.removal);
+        let data = ((dataHora.getDate() )) + "/" + ((dataHora.getMonth() + 1)) + "/" + dataHora.getFullYear();
+        let hora = dataHora.getHours()+":"+dataHora.getMinutes();
+        console.log(data);
+        console.log(hora);
+        h6_2.innerText = "Retirado no dia: "+data+" às "+hora;
+        h6.innerText = item.equipment_category;
+
+        courseInfo.appendChild(h6_2);
+        courseInfo.appendChild(btn);
+        coursePreview.appendChild(h6);
+        course.appendChild(coursePreview);
+        course.appendChild(courseInfo);
+        newContainer.appendChild(course);
+    });
 }
 window.onload = () => {carregarGCM();}
