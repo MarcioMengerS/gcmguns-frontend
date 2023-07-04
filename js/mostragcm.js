@@ -92,7 +92,8 @@ async function getEquipamentos(){
         const coursePreview = document.createElement('div');
         const h6 = document.createElement('h6');
         const courseInfo = document.createElement('div');
-        const h6_2 = document.createElement('div');
+        const h6_retira = document.createElement('div');
+        const h6_devolve = document.createElement('div');
         const btn = document.createElement('a');
 
         course.setAttribute('class', 'course');
@@ -101,18 +102,33 @@ async function getEquipamentos(){
         courseInfo.setAttribute('class', 'course-info');
         btn.setAttribute('class', 'btn-detalhes');
 
-        btn.href = `/mostraequipamento.html?id=${item.id}#modal-opened`;
+        btn.href = `/mostraequipamento.html?id=${item.id_equipment}#modal-opened`;
         btn.innerHTML = "Detalhes";
-        //formando data e hora
-        let dataHora = new Date(item.removal);
-        let data = ((dataHora.getDate() )) + "/" + ((dataHora.getMonth() + 1)) + "/" + dataHora.getFullYear();
-        let hora = dataHora.getHours()+":"+dataHora.getMinutes();
-        console.log(data);
-        console.log(hora);
-        h6_2.innerText = "Retirado no dia: "+data+" às "+hora;
+        //formando data e hora de emprestimo
+        let dataHoraRemoval = new Date(item.removal);
+        let dataRemoval = ((dataHoraRemoval.getDate() )) + "/" + ((dataHoraRemoval.getMonth() + 1)) + "/" + dataHoraRemoval.getFullYear();
+        let horaRemoval = dataHoraRemoval.getHours()+":"+dataHoraRemoval.getMinutes();
+        h6_retira.innerText = "Retirado no dia: "+dataRemoval+" às "+horaRemoval;
+        //formando data e hora de devolução
+        let dataHoraDevolution = new Date(item.devolution);
+        let dataDevolve;
+        let horaDevolve;
+        if(item.devolution==null){
+            dataDevolve = "";
+            horaDevolve = "";
+        }else{
+
+        dataDevolve = ((dataHoraDevolution.getDate() )) + "/" + ((dataHoraDevolution.getMonth() + 1)) + "/" + dataHoraDevolution.getFullYear();
+        horaDevolve = dataHoraDevolution.getHours()+":"+dataHoraDevolution.getMinutes();
+        }
+        console.log(dataDevolve);
+        console.log(horaDevolve);
+  
+        h6_devolve.innerText = "Devolveu no dia: "+dataDevolve+" - "+horaDevolve;
         h6.innerText = item.equipment_category;
 
-        courseInfo.appendChild(h6_2);
+        courseInfo.appendChild(h6_retira);
+        courseInfo.appendChild(h6_devolve);
         courseInfo.appendChild(btn);
         coursePreview.appendChild(h6);
         course.appendChild(coursePreview);

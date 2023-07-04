@@ -41,8 +41,9 @@ function listaAlgemas(){
             //Corpo do texto
             const div_body = document.createElement("div");
             div_body.setAttribute("class", "card-body");
+            //Muda cor do box quando  equipamento estiver indisponível
             if(!post.available){
-                div_body.style.backgroundColor = "#fddb3a";
+                div_body.style.backgroundColor = "#fddb3a"; //cor amarela
             }
             //título do card
             const h5_title = document.createElement("h5");
@@ -88,8 +89,9 @@ function listaColetes(){
 
             const div_body = document.createElement("div");
             div_body.setAttribute("class", "card-body");
+            //Muda cor do box quando  equipamento estiver indisponível
             if(!post.available){
-                div_body.style.backgroundColor = "#fddb3a";
+                div_body.style.backgroundColor = "#fddb3a";//cor amarela
             }
 
             const h5_title = document.createElement("h5");
@@ -104,7 +106,7 @@ function listaColetes(){
             
             h5_title.innerHTML = "Marca " + post.brand;
             p_text.innerText = "número: " + post.number;
-            a_btn.innerText = "Detalhes";
+            a_btn.innerText = "Detalhes"; //título apresentado no botão
 
             console.log(post.available);
 

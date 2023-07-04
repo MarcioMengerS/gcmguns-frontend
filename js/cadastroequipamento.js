@@ -20,6 +20,6 @@ async function cadastroEquipamento(){
     const response = await fetch('http://localhost:8080/equipment', init);
     const dados = await response.json();
     console.log(JSON.stringify(equipment));
-    //Link serve para voltar a página Lista EQUIPAMENTO
+    //Link serve para voltar a página de Listar EQUIPAMENTO
     window.location.href = "/listaequipamentos.html";
   }
