@@ -1,3 +1,8 @@
+let config = {
+    headers: {
+    'Authorization': 'Bearer ' + sessionStorage.getItem('token')
+    }
+}
 //Transições do menu lateral da página
 window.onload = () => {
     let list = document.querySelectorAll('.list-item');
@@ -32,7 +37,7 @@ function listaAlgemas(){
     postsContainer.innerHTML =""; //Serve para apagar a página
 
     async function getAllHundcuffs(){
-        const response = await fetch(url);
+        const response = await fetch(url, config);
         const data = await response.json();
         data.map((post) => {
             //tamanho do card
@@ -79,7 +84,7 @@ function listaColetes(){
     postsContainer.innerHTML = ""; //Serve para limpar conteúdo da página
 
     async function getAllColetes(){
-        const response = await fetch(url);
+        const response = await fetch(url, config);
         const data = await response.json();
         data.map((post) => {
 

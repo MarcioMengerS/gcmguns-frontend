@@ -1,8 +1,13 @@
+let config = {
+    headers: {
+    'Authorization': 'Bearer ' + sessionStorage.getItem('token')
+    }
+}
 // o mesmo que arrow function
 // function carregarListaGCM(){}
 //Função que trás do backend a lista de GCMs e apresenta no index.html
 const carregarListaGCM = async() => {
-    const response = await fetch('http://localhost:8080/gcm');
+    const response = await fetch('http://localhost:8080/gcm', config);
     const dados = await response.json();
     
     dados.forEach(item => {

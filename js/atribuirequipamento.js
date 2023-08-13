@@ -85,10 +85,10 @@ async function identificarGCM() {
     //Se capturou os 8 caracteres do cartão entar no IF
     if(data.length == 8){
       console.log('8 caracteres recebidos: ' + data);
-      const res = await fetch('http://localhost:8080/loan/equipment_id/'+params);
+      const res = await fetch('http://localhost:8080/loan/equipment_id/'+params, config);
       var resLoan = await res.json();
       
-      const response = await fetch('http://localhost:8080/gcm/'+resLoan[resLoan.length-1].id_gcm);
+      const response = await fetch('http://localhost:8080/gcm/'+resLoan[resLoan.length-1].id_gcm, config);
       var responseGcm = await response.json();
       //devolução de equipamento
       if(inputGcm.value ==""){
@@ -96,16 +96,19 @@ async function identificarGCM() {
         inputGcm.value = responseGcm.numero;
         console.log(inputGcm.value);
         //Faz a validação do crachá comparando a numeração da TAG do banco com a inserida com retorno booleano
-        const boolean = await fetch(`http://localhost:8080/gcm/search-tag/${inputGcm.value}/${data}`);
+        const boolean = await fetch(`http://localhost:8080/gcm/search-tag/${inputGcm.value}/${data}`, config);
         const dados = await boolean.json();
         const rtn = document.getElementById('return');
         rtn.setAttribute("class", "modal__btn");
         //confirmando tag e envia dados de devolução
         if(dados){//muda atributo available para True (equipamento devolvido)
+          let myHeaders = new Headers;
+          myHeaders.append("Content-Type","application/json");
+          myHeaders.append("Autorization","Bearer "+sessionStorage.getItem('token'));
           const init ={
             method:'PUT',
               // method: 'POST',
-            headers:{"Content-Type":'application/json'}
+              headers: myHeaders
           }
           await fetch(`http://localhost:8080/loan/devolve/${resLoan[resLoan.length-1].id}/${params}`, init);
           // await fetch(`http://localhost:8080/loan/${inputGcm.value}/${params}/${true}`, init);
@@ -120,15 +123,19 @@ async function identificarGCM() {
       }else{//emprestimo de equipamento
         //Faz a validação do crachá comparando a numeração da TAG do banco com a inserida com retorno booleano
         console.log("Dados no INPUT. Emprestando equipamento");
-        const boolean = await fetch(`http://localhost:8080/gcm/search-tag/${inputGcm.value}/${data}`);
+        const boolean = await fetch(`http://localhost:8080/gcm/search-tag/${inputGcm.value}/${data}`, config);
         const dados = await boolean.json();
         const rtn = document.getElementById('return');
         rtn.setAttribute("class", "modal__btn");
         //confirmando tag e envia dados de empréstimo
         if(dados){//muda atributo available para False (equipamento devolvido)
+          let myHeaders = new Headers;
+          myHeaders.append("Content-Type","application/json");
+          myHeaders.append("Autorization","Bearer "+sessionStorage.getItem('token'));
+
           const init ={
               method: 'POST',
-              headers:{"Content-Type":'application/json'}
+              headers: myHeaders
           }
           const loan = await fetch(`http://localhost:8080/loan/${inputGcm.value}/${params}`, init);
           const responseLoan = await loan.json();
