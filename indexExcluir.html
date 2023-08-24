@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="/js/index.js"></script>
+    <title>Dashboard</title>
+</head>
+<body>
+    <hr>
+     ++++++++++++++++++++++++++++++++  TESTES DE APIs +++++++++++++++++++++++++++++++++++++++++++++
+    <hr>
+    <a href="/listagcms.html">GCM</a><br>
+    <a href="/listaequipamentos.html">EQUIPAMENTOS</a>
+    <hr>
+    <div>
+        <h3>API <b>externa</b> que retorna preço dólar:</h3><hr>
+        <h4>Exemplo (https://economia.awesomeapi.com.br/last/USD-BRL)</h4>
+        <span id="nomeMoeda"></span><br>       
+        <label for="">Moeda: </label><span id="moeda"></span><br>
+        <label for="">R$ </label><span id="valor"></span>
+    </div>
+    <div>
+        <h3>API <b>externa</b> que retorna CEP:</h3><hr>
+        <h4>Exemplo(https://viacep.com.br/ws/91790755/json/)</h4>
+        Insira o CEP: <input type="text"  id="cepBuscar"><button onclick="buscarCep()">Buscar</button><br>
+        <label for="">Cep: </label><span id="cep"></span><br>
+        <label for="">Rua: </label><span id="rua"></span><br>
+        <label for="">Bairro: </label><span id="bairro"></span>
+    </div>
+    <div>
+        <h3>API que contém projeto GCM/SAC</h3><hr>
+        <h4>BUSCA GCM PELO Nº(http://localhost:8080/717) - Utiliza axios</h4>
+        Número do GM: <input type="text"  id="numeroGM" placeholder="717"><button onclick="getGcm()">Buscar</button>
+        
+        <h5>Formato de Objeto em String</h5>
+        <div id="renderResults">Dados do Guarda Municipal: </div>
+        
+        Nome: <span id="nomeGcm"></span><br>
+        Numero: <span id="numGcm"></span><br>
+        Data Nascimento: <span id="nascGcm"></span><br>
+        CPF: <span id="cpfGcm"></span><br>
+        Email: <span id="emailGcm"></span><br>
+        Data Admissão: <span id="admissGcm"></span><br>
+        Cartão: <span id="tagGcm"></span><br>
+    </div>
+    <!-- total de guardas cadastrados no sistema -->
+    <div>
+        <span>Total de GCM: </span>
+        <span id="totalGcm"></span>
+    </div>
+    <div>
+        <span>Total de Equipamentos: </span>
+        <span id="totalEquip"></span>
+    </div>
+</body>
+</html>

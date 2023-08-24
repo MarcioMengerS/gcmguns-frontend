@@ -1,59 +1,186 @@
+<!-- https://www.youtube.com/watch?v=OJEQaVT45XA&ab_channel=CodeResource -->
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
+    <!-- <meta name="viewport" content="width=device,initial-scale=1,maximum-scale=1"> -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="/js/index.js"></script>
     <title>Dashboard</title>
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+    <link rel="stylesheet" href="/css/index.css">
 </head>
 <body>
-    <hr>
-     ++++++++++++++++++++++++++++++++  TESTES DE APIs +++++++++++++++++++++++++++++++++++++++++++++
-    <hr>
-    <a href="/listagcms.html">GCM</a><br>
-    <a href="/listaequipamentos.html">EQUIPAMENTOS</a>
-    <hr>
-    <div>
-        <h3>API <b>externa</b> que retorna preço dólar:</h3><hr>
-        <h4>Exemplo (https://economia.awesomeapi.com.br/last/USD-BRL)</h4>
-        <span id="nomeMoeda"></span><br>       
-        <label for="">Moeda: </label><span id="moeda"></span><br>
-        <label for="">R$ </label><span id="valor"></span>
+    <input type="checkbox" id="nav-toggle">
+    <div class="sidebar">
+        <div class="sidebar-brand">
+            <h2><img src="/images/brasao.png" id="imgbrasao"></h2>
+        </div>
+    
+        <div class="sidebar-menu">
+            <ul>
+                <li>
+                    <a href="/listagcms.html"><span class="las la-users"></span>
+                    <span>Agentes</span></a>
+                </li>
+                <li>
+                    <a href="/listaequipamentos.html"><span class="las la-crosshairs"></span>
+                    <span>Equipamentos</span></a>
+                </li>
+                <li>
+                    <a href=""><span class="las la-file"></span>
+                    <span>Cautelas</span></a>
+                </li>
+                <li>
+                    <a href=""><span class="las la-receipt"></span>
+                    <span>Inventários</span></a>
+                </li>
+                <li>
+                    <a href=""><span class="las la-id-card"></span>
+                    <span>Contas</span></a>
+                </li>
+
+            </ul>
+        </div>
     </div>
-    <div>
-        <h3>API <b>externa</b> que retorna CEP:</h3><hr>
-        <h4>Exemplo(https://viacep.com.br/ws/91790755/json/)</h4>
-        Insira o CEP: <input type="text"  id="cepBuscar"><button onclick="buscarCep()">Buscar</button><br>
-        <label for="">Cep: </label><span id="cep"></span><br>
-        <label for="">Rua: </label><span id="rua"></span><br>
-        <label for="">Bairro: </label><span id="bairro"></span>
+    <div class="main-content">
+        <header>
+            <h2>
+                <label for="nav-toggle">
+                    <span class="las la-bars"></span>
+                </label>
+                <em>SAC-GCM</em>
+            </h2>
+            <div class="search-wrapper">
+                <span class="las la-search"></span>
+                <input type="search" placeholder="Procure aqui">
+            </div>
+            <div class="user-wrapper">
+                <img src="/images/user.png" width="40px" height="40px" alt="">
+                <div>
+                    <h4>marcioms</h4>
+                    <small>Admin</small>
+                </div>
+            </div>
+        </header>
+        <main>
+            <div class="cards">
+                <div class="card-single">
+                    <div>
+                        <h1 id="totalGcm"></h1>
+                        <span>GCM</span>
+                    </div>
+                    <div>
+                        <span class="las la-users"></span>
+                    </div>
+                </div>
+                <div class="card-single">
+                    <div>
+                        <h1 id="totalEquip"></h1>
+                        <span>Equipamentos</span>
+                    </div>
+                    <div>
+                        <span class="las la-crosshairs"></span>
+                    </div>
+                </div>
+                <div class="card-single">
+                    <div>
+                        <h1>38</h1>
+                        <span>Média idade</span>
+                    </div>
+                    <div>
+                        <span class="las la-file"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="recent-grid">
+                <div class="customers">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Cadastros Recentes</h3>
+
+                            <button onclick="enviarEmail()">Todos <span class="las la-arrow-right"></span></button>
+                        </div>
+
+                        <div class="card-body">
+                            <div class="customer">
+                               <div class="info">
+                                    <img src="/images/user.png" width="40px" height="40px" alt="">
+                                    <div>
+                                        <h4>Lewis S. Cunningham</h4>
+                                        <small>CEO Excerpt</small>
+                                    </div>
+                               </div>
+                               <div class="contact">
+                                    <span class="las la-user-circle"></span>
+                                    <span class="las la-comment"></span>
+                                    <span class="las la-phone"></span>
+                               </div>
+                            </div>
+                            <div class="customer">
+                                <div class="info">
+                                     <img src="/images/user.png" width="40px" height="40px" alt="">
+                                     <div>
+                                         <h4>Lewis S. Cunningham</h4>
+                                         <small>CEO Excerpt</small>
+                                     </div>
+                                </div>
+                                <div class="contact">
+                                     <span class="las la-user-circle"></span>
+                                     <span class="las la-comment"></span>
+                                     <span class="las la-phone"></span>
+                                </div>
+                             </div>
+                             <div class="customer">
+                                <div class="info">
+                                     <img src="/images/user.png" width="40px" height="40px" alt="">
+                                     <div>
+                                         <h4>Lewis S. Cunningham</h4>
+                                         <small>CEO Excerpt</small>
+                                     </div>
+                                </div>
+                                <div class="contact">
+                                     <span class="las la-user-circle"></span>
+                                     <span class="las la-comment"></span>
+                                     <span class="las la-phone"></span>
+                                </div>
+                             </div>
+                             <div class="customer">
+                                <div class="info">
+                                     <img src="/images/user.png" width="40px" height="40px" alt="">
+                                     <div>
+                                         <h4>Lewis S. Cunningham</h4>
+                                         <small>CEO Excerpt</small>
+                                     </div>
+                                </div>
+                                <div class="contact">
+                                     <span class="las la-user-circle"></span>
+                                     <span class="las la-comment"></span>
+                                     <span class="las la-phone"></span>
+                                </div>
+                             </div>
+                             <div class="customer">
+                                <div class="info">
+                                     <img src="/images/user.png" width="40px" height="40px" alt="">
+                                     <div>
+                                         <h4>Lewis S. Cunningham</h4>
+                                         <small>CEO Excerpt</small>
+                                     </div>
+                                </div>
+                                <div class="contact">
+                                     <span class="las la-user-circle"></span>
+                                     <span class="las la-comment"></span>
+                                     <span class="las la-phone"></span>
+                                </div>
+                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </main>
     </div>
-    <div>
-        <h3>API que contém projeto GCM/SAC</h3><hr>
-        <h4>BUSCA GCM PELO Nº(http://localhost:8080/717) - Utiliza axios</h4>
-        Número do GM: <input type="text"  id="numeroGM" placeholder="717"><button onclick="getGcm()">Buscar</button>
-        
-        <h5>Formato de Objeto em String</h5>
-        <div id="renderResults">Dados do Guarda Municipal: </div>
-        
-        Nome: <span id="nomeGcm"></span><br>
-        Numero: <span id="numGcm"></span><br>
-        Data Nascimento: <span id="nascGcm"></span><br>
-        CPF: <span id="cpfGcm"></span><br>
-        Email: <span id="emailGcm"></span><br>
-        Data Admissão: <span id="admissGcm"></span><br>
-        Cartão: <span id="tagGcm"></span><br>
-    </div>
-    <!-- total de guardas cadastrados no sistema -->
-    <div>
-        <span>Total de GCM: </span>
-        <span id="totalGcm"></span>
-    </div>
-    <div>
-        <span>Total de Equipamentos: </span>
-        <span id="totalEquip"></span>
-    </div>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="/js/index.js"></script>
 </body>
 </html>

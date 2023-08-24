@@ -26,7 +26,7 @@ const carregarListaGCM = async() => {
         var firstName = item.nome.split(" ");
         h3.innerText = firstName[0];
         const a = document.createElement('a');
-        a.href ="/mostragcm.html?id="+ item.id;
+        a.href ="/mostragcm.html?"+ item.id;//envia referencia para o botão detalhes
         a.innerHTML = "Detalhes";
    
         content.appendChild(h2);

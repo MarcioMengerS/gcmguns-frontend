@@ -54,5 +54,5 @@ async function enviaCadastro(){
   }
   const response = await fetch('http://localhost:8080/auth/save', init);
   //Link serve para ir para página de login
-  window.location.href = "/login2.html";
+  window.location.href = "/login.html";
 }

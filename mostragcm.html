@@ -65,7 +65,7 @@
                 </div>
                 <div class="col-4">
                     <label for="tag">Cartão de Identificação</label>
-                    <input type="text" class="form-control" id="tag" placeholder="Tag cartão" name="tagResult" readonly>
+                    <input type="password" class="form-control" id="tag" placeholder="******" name="tagResult" readonly>
                 </div>
                 <div class="col-3">
                     <label for="pass">Senha para Transação</label>
@@ -83,13 +83,38 @@
                 <input id="tab-2" type="radio" name="tabs" checked="true" aria-hidden="true">
                 <h2>Habilitações</h2>
                 <div>
-                  <p>Represents a generic document or application section. In this context, a section is a thematic grouping of content, typically with a header, possibly with a footer. Examples include chapters in a book, the various tabbed pages in a tabbed dialog box, or the numbered sections of a thesis. A web site's home page could be split into sections for an introduction, news items, contact information.</p>
+                  <span>+ Certificado de Habilitação a Pistola Taurus TS9 - 9mm</span>
+                  <p>+ Certificado de Habilitação a Dispositivo Elétrico Incapacitante SPARK</p>
                 </div>
                 <label for="tab-3" tabindex="0"></label>
                 <input id="tab-3" type="radio" name="tabs" aria-hidden="true">
                 <h2>+ Informações</h2>
                 <div>
-                  <p>The source element allows authors to specify multiple alternative media resources for media elements. It does not represent anything on its own. The src attribute gives the address of the media resource. The value must be a valid non-empty URL potentially surrounded by spaces. This attribute must be present.</p>
+                    <h6>Endereço:</h6>
+                    <div class="row mb-4 g-4" class="form-group">
+                        <div class="col-8">
+                            <label for="street">Rua: </label>
+                            <input type="text" class="form-control" id="street">
+                        </div>
+                        <div class="col-2">
+                            <label for="number">Número: </label>
+                            <input type="text" id="number" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row mb-4 g-4" class="form-group">
+                        <div class="col-4">
+                            <label for="neighborhood">Bairro: </label>
+                            <input type="text" class="form-control" id="neighborhood">
+                        </div>
+                        <div class="col-4">
+                            <label for="city">Cidade: </label>
+                            <input type="text" id="city" class="form-control">
+                        </div>
+                        <div class="col-4">
+                            <label for="zip">CEP: </label>
+                            <input type="text" id="zip" class="form-control">
+                        </div>
+                    </div>
                 </div>
               </div>
             <button type="button" class="btn btn-success" onclick="desbloquearDados()">Editar Campos</button>

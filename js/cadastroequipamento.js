@@ -10,6 +10,7 @@ async function cadastroEquipamento(){
       category: categoria.value,
       number: Number(numero.value)
     }
+
     let myHeaders = new Headers;
     myHeaders.append("Content-Type","application/json");
     myHeaders.append("Authorization","Bearer "+ sessionStorage.getItem('token'));
@@ -18,6 +19,7 @@ async function cadastroEquipamento(){
       headers: myHeaders,
       body: JSON.stringify(equipment)
     }
+    
     const response = await fetch('http://localhost:8080/equipment', init);
     const dados = await response.json();
     console.log(JSON.stringify(equipment));

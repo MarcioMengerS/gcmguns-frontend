@@ -1,11 +1,17 @@
-//função que pega o id que está na url informada pela página listagcms.html e mostrana tela
+let config = {
+    headers: {
+    'Authorization': 'Bearer ' + sessionStorage.getItem('token')
+    }
+}
+//função que pega o id que está na url informada pela página listagcms.js e mostra na tela
 var params = window.location.search.substring(1);
-var numGcm = document.getElementById('id_gcm');
-numGcm.innerHTML = params;
-numGcm = params.slice(-1);
+console.log("Id do GCM: "+params)
+// var params = document.getElementById('id_gcm');
+// params.innerHTML = params;
+// params = params.slice(-1);
 async function carregarGCM() {
 
-    const response = await fetch('http://localhost:8080/gcm/'+numGcm);
+    const response = await fetch('http://localhost:8080/gcm/'+params, config);
     const objeto = await response.json();
     console.log(objeto);
     const nome = document.getElementById('nome');
@@ -14,10 +20,10 @@ async function carregarGCM() {
     const dataAds = document.getElementById('data-ads');
     const dataNas = document.getElementById('data-nas');
     const email = document.getElementById('email');
-    const tag = document.getElementById('tag');
+    // const tag = document.getElementById('tag');
     const idade = document.getElementById('age');
     const contribuicao = document.getElementById('contribution');
-    const transPass = document.getElementById('pass');
+    // const transPass = document.getElementById('pass');
 
     nome.value = objeto.nome;
     numero.value = objeto.numero;
@@ -25,10 +31,10 @@ async function carregarGCM() {
     dataAds.value = objeto.dataAdmis;
     dataNas.value = objeto.dataNas;
     email.value = objeto.email;
-    tag.value = objeto.tag;
+    // tag.value = objeto.tag;
     idade.value = calculaTempo(objeto.dataNas);
     contribuicao.value = calculaTempo(objeto.dataAdmis);
-    transPass.value = objeto.transactionPass;
+    // transPass.value = objeto.transactionPass;
 }
 
 function desbloquearDados(){
@@ -61,13 +67,15 @@ async function salvarDados(){
         tag: tagObj.value,
         transactionPassword: passObj.value
     }
-    
+    let myHeaders = new Headers;
+    myHeaders.append("Content-Type","application/json");
+    myHeaders.append("Authorization","Bearer "+ sessionStorage.getItem('token'));
     const init ={
         method: 'PUT',
-        headers:{"Content-Type":'application/json'},
+        headers: myHeaders,
         body: JSON.stringify(gcm)
     }
-    await fetch('http://localhost:8080/gcm/'+numGcm, init);
+    await fetch('http://localhost:8080/gcm/'+params, init);
     //Voltar para página Lista GCM
     window.location.href = "/listagcms.html";
 }
@@ -83,7 +91,7 @@ function calculaTempo(data){
 async function getEquipamentos(){
     const clean = document.querySelector("#new-container");
     clean.innerHTML="";  //limpa guia equipamentos
-    const response = await fetch('http://localhost:8080/loan/gcm_id/'+numGcm)
+    const response = await fetch('http://localhost:8080/loan/gcm_id/'+params, config)
     const dados = await response.json();
     console.log(dados);
     dados.forEach(item => {

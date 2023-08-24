@@ -1,9 +1,9 @@
   @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
 
 :root{
-    --main-color: #DD2F6E;
-    --color-dark:#1D2231;
-    --text-grey:#8390A2;
+    --main-color: rgba(19, 73, 128, 0.8);
+    --color-dark:#2b311d;
+    --text-grey:#a28383;
 }
 *{
     padding: 0;
@@ -14,7 +14,7 @@
     font-family: 'Poppins', sans-serif;
 }
 .sidebar{
-    width: 345px; /*modifica largura do sidebar */
+    width: 245px; /*modifica largura do sidebar */
     position: fixed;
     left: 0;
     top: 0;
@@ -45,19 +45,16 @@
     color: #fff;
     font-size: 1.1rem;
 }
-.sidebar-menu a.active{
-    background: #fff;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-    color: var(--main-color);
-    border-radius: 30px 0px 0px 30px;
-}
 .sidebar-menu a span:first-child{
     font-size: 1.5rem;
     padding-right: 1rem;
 }
+#nav-toggle{
+    visibility: hidden;
+}
 #nav-toggle:checked + .sidebar{
     width: 70px;
+
 }
 #nav-toggle:checked + .sidebar .sidebar-brand,
 #nav-toggle:checked + .sidebar li{
@@ -68,7 +65,7 @@
     padding-left: 0rem;
 }
 
-#nav-toggle:checked + .sidebar .sidebar-brand h2 span:last-child,
+#nav-toggle:checked + .sidebar .sidebar-brand h2 img:last-child,
 #nav-toggle:checked + .sidebar li a span:last-child{
     display: none;
 }
@@ -79,20 +76,23 @@
 #nav-toggle:checked ~ .main-content header{
     width: calc(100% - 70px);
     left: 70px;
+
+
 }
 .main-content{
     transition: margin-left 300ms;
-    margin-left: 345px;
+    margin-left: 245px;
 }
 header{
-    background: #fff;
+    background: #2196f3;
     display: flex;
     justify-content: space-between;
     padding: 1rem 1.5rem;
-    box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+    box-shadow: 0px 0px 20px #fff;
     position: fixed;
-    left: 345px;
-    width: calc(100% - 345px);
+    left: 245px;
+    height: 79px;
+    width: calc(100% - 245px);
     top: 0;
     z-index: 100;
     transition: left 300ms;
@@ -105,9 +105,9 @@ header label span{
     padding-right: 1rem;
 }
 .search-wrapper{
-    border: 1px solid #ccc;
+    border: 1px solid var(--main-color);
     border-radius: 30px;
-    height: 50px;
+    height: 40px;
     display: flex;
     align-items: center;
     overflow-x: hidden;
@@ -133,13 +133,13 @@ header label span{
 }
 .user-wrapper small{
     display: inline-block;
-    color: var(--text-grey);
+    color: rgba(19, 73, 128, 0.8);
 }
 main{
-    margin-top: 85px;
+    margin-top: 4%;
     padding: 2rem 1.5rem;
-    background: #f1f5f9;
-    min-height: calc(100vh - 90px);
+    background: #232427;
+    min-height: calc(100vh - 70px);
 }
 .cards {
     display: grid;
@@ -176,7 +176,7 @@ main{
     grid-template-columns: 65% auto;
 }
 .card{
-    background: #fff;
+    background: #d1cac7;
     border-radius: 5px;
 }
 .card-header{
@@ -223,7 +223,7 @@ tr td:last-child{
     align-items: center;
 }
 .status.purple {
-    background: rebeccapurple;
+    background: rgb(51, 253, 0);
 }
 .status.pink {
     background: deeppink;
@@ -345,7 +345,7 @@ tr td:last-child{
     #nav-toggle:checked + .sidebar {
         left: 0 !important;
         z-index: 100;
-        width: 345px;
+        width: 245px;
     }
     #nav-toggle:checked + .sidebar .sidebar-brand
     #nav-toggle:checked + .sidebar li{
@@ -367,4 +367,11 @@ tr td:last-child{
     .cards {
         grid-template-columns: 100%;
     }
+}
+
+#imgbrasao{
+    margin-top: auto;
+    margin-left: 30%;
+    width: 70px;
+    height:auto;
 }

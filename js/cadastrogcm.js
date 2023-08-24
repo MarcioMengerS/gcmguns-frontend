@@ -83,16 +83,19 @@ async function btnCadastro(){
     dataNas: dataNascElement.value,
     dataAdmis: dataAdmisElement.value,
     email: emailElement.value,
-    tag: tagElement.value
+    tag: tagElement.value,
+    transactionPassword: null
   }
+  let myHeaders = new Headers;
+  myHeaders.append("Content-Type","application/json");
+  myHeaders.append("Authorization","Bearer "+ sessionStorage.getItem('token'));
   const init ={
     method: 'POST',
-    headers:{
-      "Content-Type":'application/json'
-    },
+    headers: myHeaders,
     body: JSON.stringify(gcm)
   }
-  const response = await fetch('http://localhost:8080/gcm', init);
+
+  let response = await fetch('http://localhost:8080/gcm', init);
   const dados = await response.json();
   console.log(JSON.stringify(gcm));
   //Link serve para voltar a página Lista GCM

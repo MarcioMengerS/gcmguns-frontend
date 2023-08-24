@@ -3,16 +3,6 @@ let config = {
     'Authorization': 'Bearer ' + sessionStorage.getItem('token')
     }
 }
-//******************* API busca preço dólar ******************************//
-fetch('https://economia.awesomeapi.com.br/last/USD-BRL')
-    .then(resposta =>{return resposta.json()}) //devolve conteúdo em forma de JSON
-    .then(corpo => {
-        console.log(corpo.USDBRL) //devolve todo conteúdo no console
-        document.getElementById("nomeMoeda").innerHTML = corpo.USDBRL.name
-        document.getElementById("moeda").innerHTML = corpo.USDBRL.code
-        document.getElementById("valor").innerHTML = corpo.USDBRL.ask
-    })
-    .catch((error) => {console.log('Catch:', error)})
 
 //******************* API busca CEP ***************************************//
 function buscarCep(){
