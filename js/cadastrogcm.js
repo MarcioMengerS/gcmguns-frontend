@@ -1,71 +1,56 @@
-//Resposta ChatGPT: exemplo de comunicação serial com a linguagem de programação javascript?
-//Solicita permissão para acessar a porta serial
-async function requestPort() {
-  const ports = await navigator.serial.getPorts();
-  if (ports.length > 0) {
-    return ports[0];
-  }
-  const options = {
-    baudRate: 9600,
-    dataBits: 8, //ou 7,
-    parity: none, //odd, even
-    bufferSize: 2, //menor que 16
-    flowControl: none, //ou hardware,
-    stopBits: 2 //ou 1
-  };
-  
-  const port = await navigator.serial.requestPort(options);
-  return port;
-}
-
+/*
+* Sites pesquisados sobre Web Serial API:
+* https://whatwebcando.today/serial.html
+* https://wicg.github.io/serial/
+*
+* Especificações da placa embarcada ESP32:
+* productId: 29987 => 0x7523
+* usbVendorId: 6790 => 0x1A86
+*
+* Diagrama esquemático da ligação do ESP32 com módulo RFid
+* https://curtocircuito.com.br/blog/Categoria%20IoT/controle-de-acesso-pelo-telegram-com-esp32
+*
+* Pinagem ESP32
+* https://www.aranacorp.com/pt/utilizar-um-modulo-rfid-com-um-esp32/
+*
+*/
+//quando mostrar mensagem de erro no console trocar de porta e fechar IDE Arduino
 // Abre a porta serial e inicia a leitura do cartão
 async function connect() {
-  const port = await requestPort();
-  await port.open({ baudRate: 9600, bufferSize:8 });
-  //
-  await port.setSignals({ break: false });
-
-  // Turn on Data Terminal Ready (DTR) signal.
-  await port.setSignals({ dataTerminalReady: true });
-  
-  // Turn off Request To Send (RTS) signal.
-  await port.setSignals({ requestToSend: false });
+  var hex="";
+  const port = await navigator.serial.requestPort({ filters: [{usbVendorId: 0x1A86}] });
+  console.log(port.getInfo());
+  await port.open({ baudRate: 9600, bufferSize: 1});
   const reader = port.readable.getReader();
   const { usbProductId, usbVendorId } = port.getInfo();
-  console.log(usbProductId);
-  console.log(usbVendorId);
+  console.log("USBProductID: "+usbProductId);
+  console.log("USBVendorId: "+usbVendorId);
+  await new Promise(resolve => setTimeout(resolve, 2000));
   while (true) {
-    const { value, done } = await reader.read();
+      const { value, done } = await reader.read();
+    if(value){
+        // console.log("value: "+value);
+        // log.textContent += value + '\n';
+    }
     if (done) {
       console.log('Conexão fechada!');
       break;
     }
-
     const decoder = new TextDecoder();
-    const data = decoder.decode(value);
-    const signals = await port.getSignals();
-    signals.dataSetReady = true;
-    signals.dataCarrierDetect = true;
-
-    console.log(`Clear To Send:       ${signals.clearToSend}`);
-    console.log(`Data Carrier Detect: ${signals.dataCarrierDetect}`);
-    console.log(`Data Set Ready:      ${signals.dataSetReady}`);
-    console.log(`Ring Indicator:      ${signals.ringIndicator}`);
-    if(data.length == 8){
-      console.log('Dados recebidos: ' + data);
-      //document.getElementById("tagResult").innerHTML = data;
-      document.querySelector('input[name="tagResult"]').value = data;
-    }
-    else{
-      // reader.cancel();
-      console.log("passe o cartão novamente");
-      console.log(data);
+    const data = decoder.decode(value);   
+    hex += data;
+    if(hex.length==8){
+      console.log(hex);
+      document.querySelector('input[name="tagResult"]').value = hex;
+      break;
     }
   }
-  // await port.close();
+  reader.cancel();
+  closed;
+  reader.releaseLock();
+  await port.forget(); 
+  console.log("numero Binário: "+hex);
 }
-
-
 //API de Cadastro de GCM
 async function btnCadastro(){
   const numeroElement = document.getElementById("num");

@@ -43,10 +43,10 @@ function getGcm(){
         })
         .catch(error=> console.log(error))
 }
-//API busca total de Guardas Cadastrados no Banco de Dados
+//API busca total de GCMs Cadastrados no BD por padrão método GET
 axios.get('http://localhost:8080/gcm/total', config)
     .then(response => {totalGcm.textContent = JSON.stringify(response.data)})
 
-//API busca total de Equipamentos Cadastrados no Banco de Dados
+//API busca total de Equipamentos Cadastrados no BD por padrão método GET
 axios.get('http://localhost:8080/equipment/total', config)
     .then(response => {totalEquip.textContent = JSON.stringify(response.data)})
