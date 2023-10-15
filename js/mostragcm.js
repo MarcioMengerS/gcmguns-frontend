@@ -1,3 +1,18 @@
+/*
+* Sites pesquisados sobre Web Serial API:
+* https://whatwebcando.today/serial.html
+* https://wicg.github.io/serial/
+*
+* Especificações da placa embarcada ESP32:
+* productId: 29987 => 0x7523
+* usbVendorId: 6790 => 0x1A86
+*
+* Diagrama esquemático da ligação do ESP32 com módulo RFid
+* https://curtocircuito.com.br/blog/Categoria%20IoT/controle-de-acesso-pelo-telegram-com-esp32
+*
+* Pinagem ESP32
+* https://www.aranacorp.com/pt/utilizar-um-modulo-rfid-com-um-esp32/
+*/
 let config = {
     headers: {
     'Authorization': 'Bearer ' + sessionStorage.getItem('token')
@@ -10,31 +25,32 @@ console.log("Id do GCM: "+params)
 // params.innerHTML = params;
 // params = params.slice(-1);
 async function carregarGCM() {
+    if(params!=""){
+        const response = await fetch('http://localhost:8080/gcm/'+params, config);
+        const objeto = await response.json();
+        console.log(objeto);
+        const nome = document.getElementById('nome');
+        const numero = document.getElementById('numero');
+        const cpf = document.getElementById('cpf');
+        const dataAds = document.getElementById('data-ads');
+        const dataNas = document.getElementById('data-nas');
+        const email = document.getElementById('email');
+        // const tag = document.getElementById('tag');
+        const idade = document.getElementById('age');
+        const contribuicao = document.getElementById('contribution');
+        // const transPass = document.getElementById('pass');
 
-    const response = await fetch('http://localhost:8080/gcm/'+params, config);
-    const objeto = await response.json();
-    console.log(objeto);
-    const nome = document.getElementById('nome');
-    const numero = document.getElementById('numero');
-    const cpf = document.getElementById('cpf');
-    const dataAds = document.getElementById('data-ads');
-    const dataNas = document.getElementById('data-nas');
-    const email = document.getElementById('email');
-    // const tag = document.getElementById('tag');
-    const idade = document.getElementById('age');
-    const contribuicao = document.getElementById('contribution');
-    // const transPass = document.getElementById('pass');
-
-    nome.value = objeto.nome;
-    numero.value = objeto.numero;
-    cpf.value = objeto.cpf;
-    dataAds.value = objeto.dataAdmis;
-    dataNas.value = objeto.dataNas;
-    email.value = objeto.email;
-    // tag.value = objeto.tag;
-    idade.value = calculaTempo(objeto.dataNas);
-    contribuicao.value = calculaTempo(objeto.dataAdmis);
-    // transPass.value = objeto.transactionPass;
+        nome.value = objeto.nome;
+        numero.value = objeto.numero;
+        cpf.value = objeto.cpf;
+        dataAds.value = objeto.dataAdmis;
+        dataNas.value = objeto.dataNas;
+        email.value = objeto.email;
+        // tag.value = objeto.tag;
+        idade.value = calculaTempo(objeto.dataNas);
+        contribuicao.value = calculaTempo(objeto.dataAdmis);
+        // transPass.value = objeto.transactionPass;
+    }
 }
 
 function desbloquearDados(){
@@ -70,12 +86,21 @@ async function salvarDados(){
     let myHeaders = new Headers;
     myHeaders.append("Content-Type","application/json");
     myHeaders.append("Authorization","Bearer "+ sessionStorage.getItem('token'));
-    const init ={
-        method: 'PUT',
-        headers: myHeaders,
-        body: JSON.stringify(gcm)
+    if(params!=""){
+        const init ={
+            method: 'PUT',
+            headers: myHeaders,
+            body: JSON.stringify(gcm)
+        }
+        await fetch('http://localhost:8080/gcm/'+params, init);
+    }else{
+        const init ={
+            method: 'POST',
+            headers: myHeaders,
+            body: JSON.stringify(gcm)
+        }
+        await fetch('http://localhost:8080/gcm', init);
     }
-    await fetch('http://localhost:8080/gcm/'+params, init);
     //Voltar para página Lista GCM
     window.location.href = "/listagcms.html";
 }
@@ -143,5 +168,10 @@ async function getEquipamentos(){
         course.appendChild(courseInfo);
         newContainer.appendChild(course);
     });
+}
+//utilizado módulo readCard.js javascript dinâmico para esta função
+async function btnLeCartao(){
+  const modulo = await import("../modules/readCard.js");
+  document.querySelector('input[name="tagResult"]').value = await modulo.connect2();
 }
 window.onload = () => {carregarGCM();}
