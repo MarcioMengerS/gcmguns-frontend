@@ -62,7 +62,11 @@ function desbloquearDados(){
     document.getElementById('data-ads').removeAttribute('readonly');
     document.getElementById('pass').removeAttribute('readonly');
 }
-
+//transforma todo nome do GCM em maiúscula
+function nomeTodasMaiusculas(){
+    let nomeObj = document.getElementById("nome");
+    nomeObj.value = nomeObj.value.toUpperCase();
+}
 async function salvarDados(){
     const numeroObj = document.getElementById("numero");
     const nomeObj = document.getElementById("nome");
