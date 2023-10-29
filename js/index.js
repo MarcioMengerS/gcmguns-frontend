@@ -50,3 +50,8 @@ axios.get('http://localhost:8080/gcm/total', config)
 //API busca total de Equipamentos Cadastrados no BD por padrão método GET
 axios.get('http://localhost:8080/equipment/total', config)
     .then(response => {totalEquip.textContent = JSON.stringify(response.data)})
+
+//exclui token de acesso após clicar em sair
+function logout(){
+    sessionStorage.removeItem('token');
+}
