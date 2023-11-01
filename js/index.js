@@ -46,10 +46,35 @@ function getGcm(){
 //API busca total de GCMs Cadastrados no BD por padrão método GET
 axios.get('http://localhost:8080/gcm/total', config)
     .then(response => {totalGcm.textContent = JSON.stringify(response.data)})
+    .catch(function(error){
+        const image = document.createElement("img");
+        image.classList.add("notification__icon");
+        image.src = "images/brasao.png";
+
+        const notificationBody = document.createElement("div");
+        notificationBody.classList.add("notification__body");//denomina div classe=notification_body
+        notificationBody.innerHTML = "Erro total GCMs: "+error.response.data;
+        notificationBody.appendChild(image);
+
+        const notificationProgress = document.createElement("div");
+        notificationProgress.classList.add("notification__progress");//denomina div classe=notification_progress
+
+        const notification = document.querySelector(".notification");
+        notification.appendChild(notificationBody);
+        notification.appendChild(notificationProgress);
+
+        console.log(notification);
+        console.log("Busca total GCMs falhou. Motivo:")
+        console.log("Erro "+error.response.status+": "+error.response.data)
+    })
 
 //API busca total de Equipamentos Cadastrados no BD por padrão método GET
 axios.get('http://localhost:8080/equipment/total', config)
     .then(response => {totalEquip.textContent = JSON.stringify(response.data)})
+    .catch(function(error){
+        console.log("Busca total equipamentos falhou. Motivo:")
+        console.log("Erro "+error.response.status+": "+error.response.data)
+    })
 
 //exclui token de acesso após clicar em sair
 function logout(){
