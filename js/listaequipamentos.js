@@ -1,7 +1,5 @@
-let config = {
-    headers: {
-    'Authorization': 'Bearer ' + sessionStorage.getItem('token')
-    }
+let config = { 
+    headers: {'Authorization': 'Bearer ' + sessionStorage.getItem('token')}
 }
 //Transições do menu lateral da página
 window.onload = () => {
@@ -31,7 +29,7 @@ function listaBastoes(){
 }
 
 function listaAlgemas(){
-    const url = "http://localhost:8080/equipment/category/ALGEMA";
+    const url = "https://gcmsystem.up.railway.app/equipment/category/ALGEMA";
 
     const postsContainer = document.querySelector("#posts-container-equip");
     postsContainer.innerHTML =""; //Serve para apagar a página
@@ -78,7 +76,7 @@ function listaAlgemas(){
 
 function listaColetes(){
     //Location.reload();
-    const url = "http://localhost:8080/equipment/category/COLETE";
+    const url = "https://gcmsystem.up.railway.app/equipment/category/COLETE";
 
     const postsContainer = document.querySelector("#posts-container-equip");
     postsContainer.innerHTML = ""; //Serve para limpar conteúdo da página

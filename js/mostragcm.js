@@ -1,18 +1,3 @@
-/*
-* Sites pesquisados sobre Web Serial API:
-* https://whatwebcando.today/serial.html
-* https://wicg.github.io/serial/
-*
-* Especificações da placa embarcada ESP32:
-* productId: 29987 => 0x7523
-* usbVendorId: 6790 => 0x1A86
-*
-* Diagrama esquemático da ligação do ESP32 com módulo RFid
-* https://curtocircuito.com.br/blog/Categoria%20IoT/controle-de-acesso-pelo-telegram-com-esp32
-*
-* Pinagem ESP32
-* https://www.aranacorp.com/pt/utilizar-um-modulo-rfid-com-um-esp32/
-*/
 let config = {
     headers: {
     'Authorization': 'Bearer ' + sessionStorage.getItem('token')
@@ -26,7 +11,7 @@ console.log("Id do GCM: "+params)
 // params = params.slice(-1);
 async function carregarGCM() {
     if(params!=""){
-        const response = await fetch('http://localhost:8080/gcm/'+params, config);
+        const response = await fetch('https://gcmsystem.up.railway.app/gcm/'+params, config);
         const objeto = await response.json();
         console.log(objeto);
         const nome = document.getElementById('nome');
@@ -96,14 +81,14 @@ async function salvarDados(){
             headers: myHeaders,
             body: JSON.stringify(gcm)
         }
-        await fetch('http://localhost:8080/gcm/'+params, init);
+        await fetch('https://gcmsystem.up.railway.app/gcm/'+params, init);
     }else{
         const init ={
             method: 'POST',
             headers: myHeaders,
             body: JSON.stringify(gcm)
         }
-        await fetch('http://localhost:8080/gcm', init);
+        await fetch('https://gcmsystem.up.railway.app/gcm', init);
     }
     //Voltar para página Lista GCM
     window.location.href = "/listagcms.html";
@@ -120,7 +105,7 @@ function calculaTempo(data){
 async function getEquipamentos(){
     const clean = document.querySelector("#new-container");
     clean.innerHTML="";  //limpa guia equipamentos
-    const response = await fetch('http://localhost:8080/loan/gcm_id/'+params, config)
+    const response = await fetch('https://gcmsystem.up.railway.app/loan/gcm_id/'+params, config)
     const dados = await response.json();
     console.log(dados);
     dados.forEach(item => {

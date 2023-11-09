@@ -15,7 +15,7 @@ function enviarEmail(docum){
     Password : "6F116CB50DD8C802B0758A8EA02A0F1049CF",
     To : 'gm717gem@gmail.com',
     From : "2018007159@restinga.ifrs.edu.br",
-    Subject : "Cautela SAC/GCM",
+    Subject : "Cautela EARC/GCM",
     Body : "Cautela referente a empréstimo de equipamento. Email automático, NÃO responda.",
     Attachments:
       [{
@@ -73,12 +73,12 @@ async function identityGcm() {
   console.log('8 caracteres recebidos: ' + data);
   
   //Retorna todos os GM que estiveram em posse do equipamento
-  const res = await fetch('http://localhost:8080/loan/equipment_id/'+params, config);
+  const res = await fetch('https://gcmsystem.up.railway.app/loan/equipment_id/'+params, config);
   var resLoan = await res.json();
   console.log("resLoan: " +resLoan);
   //entra no if somente se o equipamento já foi emprestado
   if(resLoan.length != 0){
-    const response = await fetch('http://localhost:8080/gcm/'+resLoan[resLoan.length-1].id_gcm, config);
+    const response = await fetch('https://gcmsystem.up.railway.app/gcm/'+resLoan[resLoan.length-1].id_gcm, config);
     var responseGcm = await response.json();
   }
   //devolução de equipamento
@@ -87,7 +87,7 @@ async function identityGcm() {
     inputGcm.value = responseGcm.numero;
     console.log(inputGcm.value);
     //Faz a validação do crachá comparando a numeração da TAG do banco com a inserida com retorno booleano
-    const boolean = await fetch(`http://localhost:8080/gcm/search-tag/${inputGcm.value}/${data}`, config);
+    const boolean = await fetch(`https://gcmsystem.up.railway.app/gcm/search-tag/${inputGcm.value}/${data}`, config);
     const dados = await boolean.json();
     const rtn = document.getElementById('return');
     rtn.setAttribute("class", "modal__btn");
@@ -100,7 +100,7 @@ async function identityGcm() {
         method:'PUT',
         headers: myHeaders
       }
-      await fetch(`http://localhost:8080/loan/devolve/${resLoan[resLoan.length-1].id}/${params}`, init);
+      await fetch(`https://gcmsystem.up.railway.app/loan/devolve/${resLoan[resLoan.length-1].id}/${params}`, init);
       // await fetch(`http://localhost:8080/loan/${inputGcm.value}/${params}/${true}`, init);
       rtn.innerText = "Equipamento devolvido pelo GCM "+inputGcm.value;
       rtn.setAttribute("href", "/listaequipamentos.html");
@@ -113,7 +113,7 @@ async function identityGcm() {
   }else{//emprestimo de equipamento
     //Faz a validação do crachá comparando a numeração da TAG do banco com a inserida com retorno booleano
     console.log("Dados no INPUT. Emprestando equipamento");
-    const boolean = await fetch(`http://localhost:8080/gcm/search-tag/${inputGcm.value}/${data}`, config);
+    const boolean = await fetch(`https://gcmsystem.up.railway.app/gcm/search-tag/${inputGcm.value}/${data}`, config);
     const dados = await boolean.json();
     const rtn = document.getElementById('return');
     rtn.setAttribute("class", "modal__btn");
@@ -127,7 +127,7 @@ async function identityGcm() {
           method: 'POST',
           headers: myHeaders
       }
-      const loan = await fetch(`http://localhost:8080/loan/${inputGcm.value}/${params}`, init);
+      const loan = await fetch(`https://gcmsystem.up.railway.app/loan/${inputGcm.value}/${params}`, init);
       const responseLoan = await loan.json();
       console.log(responseLoan);
       rtn.innerText = "Emprestado equipamento ao GCM "+inputGcm.value;
@@ -138,7 +138,7 @@ async function identityGcm() {
         'Authorization': 'Bearer ' + sessionStorage.getItem('token')
         }
       };
-      const eqip = await fetch('http://localhost:8080/equipment/'+params, config1);
+      const eqip = await fetch('https://gcmsystem.up.railway.app/equipment/'+params, config1);
       var resEqip = await eqip.json();
       console.log(resEqip);
 
