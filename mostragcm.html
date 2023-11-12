@@ -28,16 +28,19 @@
         <form>
             <div class="row mb-4 g-4" class="form-group">
                 <div class="col-6">
-                    <label for="nome" class="form-label">Nome</label>
-                    <input type="text" class="form-control" id="nome" placeholder="Fulano de tal" onkeyup="nomeTodasMaiusculas()" readonly>
+                    <label for="nome" class="form-label">Nome*</label>
+                    <input type="text" class="form-control required" id="nome" placeholder="Nome do GCM" onkeyup="nomeTodasMaiusculas()" readonly oninput="nameValid()" required>
+                    <span class="span-required">Nome deve ter no mínimo 12 e máximo 50 caracteres</span>
                 </div>
                 <div class="col-2">
-                    <label for="numero" class="form-label">Número</label>
-                    <input type="number" class="form-control" id="numero" placeholder="Nº" readonly>
+                    <label for="numero" class="form-label">Número*</label>
+                    <input type="number" required class="form-control required" id="numero" placeholder="Nº" oninput="numberValid()" readonly>
+                    <span class="span-required">Nº inválido</span>
                 </div>
                 <div class="col-4">
-                    <label for="cpf" class="form-label">CPF</label>
-                    <input type="text" class="form-control" id="cpf" placeholder="000.000.000-00" readonly>
+                    <label for="cpf" class="form-label">CPF*</label>
+                    <input type="text" required class="form-control required" id="cpf" placeholder="somente números" oninput="cpfValid()" readonly>
+                    <span class="span-required">CPF inválido</span>
                 </div>
             </div>
             <div class="row mb-4 g-4" class="form-group">
@@ -50,8 +53,9 @@
                     <input type="date" class="form-control" id="data-nas" placeholder="Data Nas" readonly>
                 </div>
                 <div class="col-6">
-                    <label for="email" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="email" placeholder="Email" readonly>
+                    <label for="email" class="form-label"> Email*</label>
+                    <input type="email" required class="form-control required" id="email" placeholder="Email" oninput="emailValid()" readonly>
+                    <span class="span-required">E-mail inválido</span>
                 </div>
             </div>
             <div class="row mb-4 g-4"class="form-group">

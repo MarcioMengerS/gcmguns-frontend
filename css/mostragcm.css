@@ -292,3 +292,9 @@ img{
 	letter-spacing: 1px;
   text-decoration: none;
 }
+/* avisos de validação para nome, email, cpf e nº */
+.span-required{
+  font-size: 12px;
+  color: #e63636;
+  display: none;
+}

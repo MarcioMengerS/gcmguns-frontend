@@ -1,7 +1,5 @@
 let config = {
-    headers: {
-    'Authorization': 'Bearer ' + sessionStorage.getItem('token')
-    }
+    headers: {'Authorization':'Bearer '+sessionStorage.getItem('token')}
 }
 //função que pega o id que está na url informada pela página listagcms.js e mostra na tela
 var params = window.location.search.substring(1);
@@ -37,7 +35,7 @@ async function carregarGCM() {
         // transPass.value = objeto.transactionPass;
     }
 }
-
+//desbloqueia campos do formulário
 function desbloquearDados(){
     document.getElementById('nome').removeAttribute('readonly');
     document.getElementById('numero').removeAttribute('readonly');
@@ -52,9 +50,66 @@ function nomeTodasMaiusculas(){
     let nomeObj = document.getElementById("nome");
     nomeObj.value = nomeObj.value.toUpperCase();
 }
+//Validações campos cadastros GCM
+const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+const campos = document.querySelectorAll('.required');
+const spans = document.querySelectorAll('.span-required');
+function setError(index){
+    campos[index].style.border = '3px solid #e63636';
+    spans[index].style.display = 'block';
+    return false;
+}
+function removeError(index){
+    campos[index].style.border = '';
+    spans[index].style.display = 'none';
+    return true;
+}
+function nameValid(){
+    if(campos[0].value.length > 50 || campos[0].value.length < 12) return setError(0);
+    else return removeError(0);
+}
+function numberValid(){
+    if(campos[1].value < 1) return setError(1);
+    else return removeError(1);
+}
+function cpfValid() {
+    if (campos[2].value == "00000000000") {return setError(2);}
+    if (campos[2].value.length != 11) {return setError(2);}
+    var soma = 0;
+    var resto;
+
+    for (i = 1; i <= 9; i++) {
+        soma = soma + (parseInt(campos[2].value.substring(i - 1, i)) * (11 - i));
+    }
+
+    resto = (soma * 10) % 11;
+    if ((resto == 10) || (resto == 11)){resto = 0;}
+    if (resto != parseInt(campos[2].value.substring(9, 10))){return setError(2);}
+
+    soma = 0;
+    for (i = 1; i <= 10; i++) {
+        soma = soma + (parseInt(campos[2].value.substring(i - 1, i)) * (12 - i));
+    }
+
+    resto = (soma * 10) % 11;
+    if ((resto == 10) || (resto == 11)){resto = 0;}
+    if (resto != parseInt(campos[2].value.substring(10, 11))){return setError(2);}
+    return removeError(2);
+}
+function emailValid(){
+    if(emailRegex.test(campos[3].value)) return removeError(3);
+    else return setError(3);
+}
+
 async function salvarDados(){
-    const numeroObj = document.getElementById("numero");
+    //validações de campos
+    if(!nameValid()) return alert("NOME incorreto. Revise-o!");
+    if(!numberValid()) return alert("NÚMERO incorreto. Revise-o!");
+    if(!cpfValid()) return alert("CPF incorreto. Revise-o!");
+    if(!emailValid()) return alert("E-MAIL incorreto. Revise-o!");
+
     const nomeObj = document.getElementById("nome");
+    const numeroObj = document.getElementById("numero");
     const cpfObj = document.getElementById("cpf");
     const dataNascObj = document.getElementById("data-nas");
     const dataAdmisObj = document.getElementById("data-ads");
@@ -88,10 +143,13 @@ async function salvarDados(){
             headers: myHeaders,
             body: JSON.stringify(gcm)
         }
-        await fetch('https://gcmsystem.up.railway.app/gcm', init);
+        try{
+            const response = await fetch('https://gcmsystem.up.railway.app/gcm', init)
+            if(!response.ok) throw (`Error: Response status ${response.status}`);
+        }catch(e) {console.log(e)}
     }
     //Voltar para página Lista GCM
-    window.location.href = "/listagcms.html";
+    //window.location.href = "/listagcms.html";
 }
 
 function calculaTempo(data){
