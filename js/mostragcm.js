@@ -149,7 +149,7 @@ async function salvarDados(){
         }catch(e) {console.log(e)}
     }
     //Voltar para página Lista GCM
-    //window.location.href = "/listagcms.html";
+    window.location.href = "/listagcms.html";
 }
 
 function calculaTempo(data){
