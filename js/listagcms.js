@@ -1,7 +1,5 @@
 let config = {
-    headers: {
-    'Authorization': 'Bearer ' + sessionStorage.getItem('token')
-    }
+    headers: {'Authorization': 'Bearer ' + sessionStorage.getItem('token')}
 }
 // o mesmo que arrow function
 // function carregarListaGCM(){}
@@ -11,7 +9,7 @@ const carregarListaGCM = async() => {
     const dados = await response.json();
     
     dados.forEach(item => {
-        
+
         const container = document.getElementById('container_mm');
         container.setAttribute('class', 'container');
         const card = document.createElement('div');

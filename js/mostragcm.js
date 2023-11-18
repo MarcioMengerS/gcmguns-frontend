@@ -4,15 +4,14 @@ let config = {
 //função que pega o id que está na url informada pela página listagcms.js e mostra na tela
 var params = window.location.search.substring(1);
 console.log("Id do GCM: "+params)
-// var params = document.getElementById('id_gcm');
-// params.innerHTML = params;
-// params = params.slice(-1);
+
+//iniciado automaticamente no final do arquivo. chamado por listagcms.js
 async function carregarGCM() {
     if(params!=""){
         const response = await fetch('https://gcmsystem.up.railway.app/gcm/'+params, config);
         const objeto = await response.json();
         console.log(objeto);
-        const nome = document.getElementById('nome');
+const nome = document.getElementById('nome');
         const numero = document.getElementById('numero');
         const cpf = document.getElementById('cpf');
         const dataAds = document.getElementById('data-ads');
@@ -32,7 +31,7 @@ async function carregarGCM() {
         // tag.value = objeto.tag;
         idade.value = calculaTempo(objeto.dataNas);
         contribuicao.value = calculaTempo(objeto.dataAdmis);
-        // transPass.value = objeto.transactionPass;
+        // transPass.value = objeto.transactionPass;    
     }
 }
 //desbloqueia campos do formulário

@@ -20,3 +20,6 @@ Alterado os dominios das rotass das funções JS. No primeiro momento o backend 
     * https://gcmsystem.up.railway.app
 * Dominio NETLIFY depois da implantação:
     * https://gcmsystem.netlify.app
+
+## Preload 12/11/2023
+Implementado 2(dois)segundos e meio de pré-carregamento na página principal (*index.html*) para que o usuário final não visualize o carregamento desordenado do site.
