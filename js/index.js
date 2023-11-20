@@ -1,9 +1,9 @@
 let config = {
-headers: {
-    'Authorization': 'Bearer ' + sessionStorage.getItem('token')
-    }
+    headers: {'Authorization': 'Bearer ' + sessionStorage.getItem('token')}
 }
-
+//let dominio = 'https://gcmsystem.up.railway.app'; //RAILWAY
+//let dominio = 'http://localhost:8080';
+import { dominio } from "../modules/dominio.js";
 //******************* API busca CEP ***************************************//
 // function buscarCep(){
 //     let recebeCep =  document.getElementById("cepBuscar").value
@@ -44,7 +44,7 @@ headers: {
 //         .catch(error=> console.log(error))
 // }
 //API busca total de GCMs Cadastrados no BD por padrão método GET
-axios.get('https://gcmsystem.up.railway.app/gcm/total', config)
+axios.get(dominio+'/gcm/total', config)
     .then(response => {totalGcm.textContent = JSON.stringify(response.data)})
     .catch(function(error){
         console.log("Erro "+error.response.status+": "+error.response.data)
@@ -53,7 +53,7 @@ axios.get('https://gcmsystem.up.railway.app/gcm/total', config)
 )
 
 //API busca total de Equipamentos Cadastrados no BD por padrão método GET
-axios.get('https://gcmsystem.up.railway.app/equipment/total', config)
+axios.get(dominio+'/equipment/total', config)
     .then(response => {totalEquip.textContent = JSON.stringify(response.data)})
     .catch(function(error){
         console.log("Busca total equipamentos falhou. Motivo:")
