@@ -47,9 +47,8 @@ headers: {
 axios.get('https://gcmsystem.up.railway.app/gcm/total', config)
     .then(response => {totalGcm.textContent = JSON.stringify(response.data)})
     .catch(function(error){
-        if(error.response.status == 403){
-            window.location.href = "/login.html";
-        }
+        console.log("Erro "+error.response.status+": "+error.response.data)
+        window.location.href = "/login.html";
     }
 )
 
@@ -59,9 +58,7 @@ axios.get('https://gcmsystem.up.railway.app/equipment/total', config)
     .catch(function(error){
         console.log("Busca total equipamentos falhou. Motivo:")
         console.log("Erro "+error.response.status+": "+error.response.data)
-        if(error.response.status == 403){
-            window.location.href = "/login.html";
-        }
+        window.location.href = "/login.html";
     }
 )
 
