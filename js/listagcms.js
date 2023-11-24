@@ -1,7 +1,8 @@
+//const dominio = 'http://localhost:8080';
+const dominio = 'https://gcmsystem.up.railway.app';//README
 let config = {
     headers: {'Authorization': 'Bearer ' + sessionStorage.getItem('token')}
 }
-import { dominio } from "../modules/dominio.js";
 // o mesmo que arrow function
 // function carregarListaGCM(){}
 //Função que trás do backend a lista de GCMs e apresenta no index.html

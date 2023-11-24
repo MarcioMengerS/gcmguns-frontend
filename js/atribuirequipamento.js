@@ -4,15 +4,16 @@ console.log("ID_EQUIPAMENTO: "+params);
 
 //Enviar e-mail
 function enviarEmail(docum){
-  // var docum = new jsPDF();
+
   var pdfBase64 = docum.output('datauristring');
   Email.send({
     //API server para envio de email https://app.elasticemail.com/api/
     //Conta: 2018007159@restinga.ifrs.edu.br
+    //https://smtpjs.com/
     SecureToken: "35a67301-86d8-4595-918d-01b5928660d9",
     Host : "smtp.elasticemail.com",
     Username : "2018007159@restinga.ifrs.edu.br",
-    Password : "6F116CB50DD8C802B0758A8EA02A0F1049CF",
+    Password : "3BD17614390646D485DD2D6B44A310D53ACC",
     To : 'gm717gem@gmail.com',
     From : "2018007159@restinga.ifrs.edu.br",
     Subject : "Cautela EARC/GCM",
@@ -23,10 +24,13 @@ function enviarEmail(docum){
         data : pdfBase64 
       }]
   }).then(
-    message => alert(message)
-  );
+    (message) => {
+      alert("Cautela enviada por email, status: "+message)
+    }
+  )
 }
 //Gerar documento PDF e no final envia email
+//https://raw.githack.com/MrRio/jsPDF/master/index.html
 async function gerarPdf(obj){
   var doc = new jsPDF();
   doc.setFontSize(12);
@@ -39,8 +43,8 @@ async function gerarPdf(obj){
   doc.setFontSize(24);
   doc.text("Cautela nº 04", 90, 70);
   doc.setFontSize(10);
-  doc.text("Guarda Municipal "+obj.nameGcm+" declara ter RECEBIDO do supervisor do setor de armamento e ", 20, 80);
-  doc.text("comunicação - SAC, o material abaixo discriminado:", 15, 87);
+  doc.text("Guarda Municipal "+obj.nameGcm+" declara ter RECEBIDO do supervisor da Equipe de ", 20, 80);
+  doc.text("armamento e comunicação - EARC, o material abaixo discriminado:", 15, 87);
   doc.text("", 15, 97);
   doc.text(obj.nameEquipment, 50, 101);
   doc.text(" Marca: "+obj.brandEquip, 80, 101);
@@ -54,7 +58,7 @@ async function gerarPdf(obj){
   var dateHour = now.toLocaleString("pt-br");
   doc.text("Realizado empréstimo do equipamento no dia: "+dateHour,50, 160);
   doc.text("Essa cautela foi gerada automaticamente mediante uso de senha e aproximação de crachá para identiicação", 30, 167)
-  
+
   doc.save('Cautela.pdf');
   // Set the document to automatically print via JS
   //doc.autoPrint();
@@ -67,6 +71,7 @@ async function identityGcm() {
     'Authorization': 'Bearer ' + sessionStorage.getItem('token')
     }
   }
+
   const inputGcm = document.getElementById('input');
   const modulo = await import("../modules/readCard.js");
   const data = await modulo.connect2();
@@ -101,7 +106,7 @@ async function identityGcm() {
         headers: myHeaders
       }
       await fetch(`https://gcmsystem.up.railway.app/loan/devolve/${resLoan[resLoan.length-1].id}/${params}`, init);
-      // await fetch(`http://localhost:8080/loan/${inputGcm.value}/${params}/${true}`, init);
+// await fetch(`http://localhost:8080/loan/${inputGcm.value}/${params}/${true}`, init);
       rtn.innerText = "Equipamento devolvido pelo GCM "+inputGcm.value;
       rtn.setAttribute("href", "/listaequipamentos.html");
       console.log("GCM:");console.log(responseGcm);
@@ -161,11 +166,4 @@ async function identityGcm() {
       rtn.setAttribute("href", "/listaequipamentos.html");
     }
   }
-}
-
-function confirmPassword(){
-  const formulario = document.querySelector('#identity')
-  formulario.style.visibility = 'hidden';
-  const avisos = document.querySelector('#teste');
-  avisos.innerHTML = "AGORA, Aproxime o cartão do leitor"
 }

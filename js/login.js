@@ -1,4 +1,5 @@
-import { dominio } from "../modules/dominio.js";
+//const dominio = 'http://localhost:8080';//README
+const dominio = 'https://gcmsystem.up.railway.app';
 //evento ocorre após inserir dados de acesso e clicar enter
 document.addEventListener("keypress", function(e){
   if(e.key === 'Enter'){
