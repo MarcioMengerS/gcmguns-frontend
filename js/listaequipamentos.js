@@ -1,3 +1,5 @@
+//const dominio = 'http://localhost:8080';//README
+const dominio = 'https://gcmsystem.up.railway.app';
 let config = { 
     headers: {'Authorization': 'Bearer ' + sessionStorage.getItem('token')}
 }
@@ -29,7 +31,7 @@ function listaBastoes(){
 }
 
 function listaAlgemas(){
-    const url = "https://gcmsystem.up.railway.app/equipment/category/ALGEMA";
+    const url = dominio+"/equipment/category/ALGEMA";
 
     const postsContainer = document.querySelector("#posts-container-equip");
     postsContainer.innerHTML =""; //Serve para apagar a página
@@ -76,7 +78,7 @@ function listaAlgemas(){
 
 function listaColetes(){
     //Location.reload();
-    const url = "https://gcmsystem.up.railway.app/equipment/category/COLETE";
+    const url = dominio+"/equipment/category/COLETE";
 
     const postsContainer = document.querySelector("#posts-container-equip");
     postsContainer.innerHTML = ""; //Serve para limpar conteúdo da página

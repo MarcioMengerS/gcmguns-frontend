@@ -1,7 +1,28 @@
+//const dominio = 'http://localhost:8080';//README
+const dominio = 'https://gcmsystem.up.railway.app';
 let config = {
-headers: {
-    'Authorization': 'Bearer ' + sessionStorage.getItem('token')
+    headers: {'Authorization': 'Bearer ' + sessionStorage.getItem('token')}
+}
+//API busca total de GCMs Cadastrados no BD por padrão método GET
+axios.get(dominio+'/gcm/total', config)
+    .then(response => {totalGcm.textContent = JSON.stringify(response.data)})
+    .catch(function(error){
+        console.log("Erro "+error.response.status+": "+error.response.data)
+        window.location.href = "/login.html";
     }
+)
+//API busca total de Equipamentos Cadastrados no BD por padrão método GET
+axios.get(dominio+'/equipment/total', config)
+    .then(response => {totalEquip.textContent = JSON.stringify(response.data)})
+    .catch(function(error){
+        console.log("Busca total equipamentos falhou. Motivo:")
+        console.log("Erro "+error.response.status+": "+error.response.data)
+        window.location.href = "/login.html";
+    }
+)
+//exclui token de acesso após clicar em sair
+function logout(){
+    sessionStorage.removeItem('token');
 }
 
 //******************* API busca CEP ***************************************//
@@ -43,26 +64,3 @@ headers: {
 //         })
 //         .catch(error=> console.log(error))
 // }
-//API busca total de GCMs Cadastrados no BD por padrão método GET
-axios.get('https://gcmsystem.up.railway.app/gcm/total', config)
-    .then(response => {totalGcm.textContent = JSON.stringify(response.data)})
-    .catch(function(error){
-        console.log("Erro "+error.response.status+": "+error.response.data)
-        window.location.href = "/login.html";
-    }
-)
-
-//API busca total de Equipamentos Cadastrados no BD por padrão método GET
-axios.get('https://gcmsystem.up.railway.app/equipment/total', config)
-    .then(response => {totalEquip.textContent = JSON.stringify(response.data)})
-    .catch(function(error){
-        console.log("Busca total equipamentos falhou. Motivo:")
-        console.log("Erro "+error.response.status+": "+error.response.data)
-        window.location.href = "/login.html";
-    }
-)
-
-//exclui token de acesso após clicar em sair
-function logout(){
-    sessionStorage.removeItem('token');
-}

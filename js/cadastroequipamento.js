@@ -1,3 +1,6 @@
+//const dominio = 'http://localhost:8080';//README
+const dominio = 'https://gcmsystem.up.railway.app';
+
 async function cadastroEquipamento(){
   const marca = document.getElementById("brand");
   const calibre = document.getElementById("calibre");
@@ -20,7 +23,7 @@ async function cadastroEquipamento(){
     body: JSON.stringify(equipment)
   }
   
-  const response = await fetch('https://gcmsystem.up.railway.app/equipment', init);
+  const response = await fetch(dominio+'/equipment', init);
   const dados = await response.json();
   console.log(JSON.stringify(equipment));
   //Link serve para voltar a página de Listar EQUIPAMENTO

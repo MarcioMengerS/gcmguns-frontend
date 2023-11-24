@@ -15,9 +15,9 @@
                     <h2>Admin Login</h2>
                     <p>Insira suas credenciais para efetuar login no sistema</p>
                 </div>
-                <div><!-- <form method="post" action="http://localhost:8080/login"> -->
+                <form>
                     <div class="form-group">
-                        <input type="text" name="username" id="username" class="form-control" placeholder="username">
+                        <input type="text" name="username" id="username" class="form-control" placeholder="nome de usuário" autocomplete="name">
                     </div>
                     <div class="form-group">
                         <input type="password" name="password" id="password" class="form-control" placeholder="insira sua senha">
@@ -25,10 +25,8 @@
                     <span>
                         Não tem cadastro? solicite a sua chefia imediata.
                     </span>
-                    <!-- <button type="button"class="btn btn-primary" onclick="enviaLogin()">Login</button> -->
                     <button type="button"class="btn btn-primary" id="submit" onclick="enviaLogin()">Login</button>
-
-                </div>
+                </form>
             </div>
         </div>
     </div>

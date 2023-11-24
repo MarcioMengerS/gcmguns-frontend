@@ -1,3 +1,5 @@
+//const dominio = 'http://localhost:8080';//README
+const dominio = 'https://gcmsystem.up.railway.app';
 let config = {
     headers: {'Authorization':'Bearer '+sessionStorage.getItem('token')}
 }
@@ -8,7 +10,7 @@ console.log("Id do GCM: "+params)
 //iniciado automaticamente no final do arquivo. chamado por listagcms.js
 async function carregarGCM() {
     if(params!=""){
-        const response = await fetch('https://gcmsystem.up.railway.app/gcm/'+params, config);
+        const response = await fetch(dominio+'/gcm/'+params, config);
         const objeto = await response.json();
         console.log(objeto);
 const nome = document.getElementById('nome');
@@ -135,7 +137,7 @@ async function salvarDados(){
             headers: myHeaders,
             body: JSON.stringify(gcm)
         }
-        await fetch('https://gcmsystem.up.railway.app/gcm/'+params, init);
+        await fetch(dominio+'/gcm/'+params, init);
     }else{
         const init ={
             method: 'POST',
@@ -143,7 +145,7 @@ async function salvarDados(){
             body: JSON.stringify(gcm)
         }
         try{
-            const response = await fetch('https://gcmsystem.up.railway.app/gcm', init)
+            const response = await fetch(dominio+'/gcm', init)
             if(!response.ok) throw (`Error: Response status ${response.status}`);
         }catch(e) {console.log(e)}
     }
@@ -162,7 +164,7 @@ function calculaTempo(data){
 async function getEquipamentos(){
     const clean = document.querySelector("#new-container");
     clean.innerHTML="";  //limpa guia equipamentos
-    const response = await fetch('https://gcmsystem.up.railway.app/loan/gcm_id/'+params, config)
+    const response = await fetch(dominio+'/loan/gcm_id/'+params, config)
     const dados = await response.json();
     console.log(dados);
     dados.forEach(item => {

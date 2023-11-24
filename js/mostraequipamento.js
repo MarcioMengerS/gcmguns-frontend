@@ -1,11 +1,13 @@
+//const dominio = 'http://localhost:8080';//README
+const dominio = 'https://gcmsystem.up.railway.app';
 let config = {
-    headers: {'Authorization': 'Bearer ' + sessionStorage.getItem('token') }
+    headers: {'Authorization': 'Bearer ' + sessionStorage.getItem('token')}
 }
 
 var params = window.location.search.substring(4);
 const carregarModal = async() => {
 
-    const response = await fetch('https://gcmsystem.up.railway.app/equipment/'+params, config);
+    const response = await fetch(dominio+'/equipment/'+params, config);
     const dados = await response.json();
 
     const modaltitle = document.getElementById('modal_t');
@@ -18,7 +20,7 @@ const carregarModal = async() => {
 
     //Se o equipamento está indisponivel entra no if muda modal
     if(!dados.available){
-        const response = await fetch('https://gcmsystem.up.railway.app/loan/equipment_id/'+dados.id, config);
+        const response = await fetch(dominio+'/loan/equipment_id/'+dados.id, config);
         const da = await response.json();
         console.log("Array de equipamentos Emprestados: ");console.log(da);
         var array = [];

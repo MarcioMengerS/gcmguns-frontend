@@ -1,3 +1,5 @@
+//const dominio = 'http://localhost:8080';
+const dominio = 'https://gcmsystem.up.railway.app';//README
 let config = {
     headers: {'Authorization': 'Bearer ' + sessionStorage.getItem('token')}
 }
@@ -5,7 +7,7 @@ let config = {
 // function carregarListaGCM(){}
 //Função que trás do backend a lista de GCMs e apresenta no index.html
 const carregarListaGCM = async() => {
-    const response = await fetch('https://gcmsystem.up.railway.app/gcm', config);
+    const response = await fetch(dominio+'/gcm', config);
     const dados = await response.json();
     
     dados.forEach(item => {
