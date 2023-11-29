@@ -37,15 +37,15 @@ const nome = document.getElementById('nome');
     }
 }
 //desbloqueia campos do formulário
-function desbloquearDados(){
-    document.getElementById('nome').removeAttribute('readonly');
-    document.getElementById('numero').removeAttribute('readonly');
-    document.getElementById('cpf').removeAttribute('readonly');
-    document.getElementById('email').removeAttribute('readonly');
-    document.getElementById('data-nas').removeAttribute('readonly');
-    document.getElementById('data-ads').removeAttribute('readonly');
-    document.getElementById('pass').removeAttribute('readonly');
-}
+// function desbloquearDados(){
+//     document.getElementById('nome').removeAttribute('readonly');
+//     document.getElementById('numero').removeAttribute('readonly');
+//     document.getElementById('cpf').removeAttribute('readonly');
+//     document.getElementById('email').removeAttribute('readonly');
+//     document.getElementById('data-nas').removeAttribute('readonly');
+//     document.getElementById('data-ads').removeAttribute('readonly');
+//     document.getElementById('pass').removeAttribute('readonly');
+// }
 //transforma todo nome do GCM em maiúscula
 function nomeTodasMaiusculas(){
     let nomeObj = document.getElementById("nome");
@@ -161,13 +161,70 @@ function calculaTempo(data){
         return tempo+" anos";
     }
 }
+async function geracaPdf(obj){
+
+    var doc = new jsPDF();
+    doc.setFontSize(12);
+    doc.text("PREFEITURA MUNICIPAL DE PORTO ALEGRE",45, 30);
+    doc.text("Secretaria Municipal de Segurança",45, 39);
+    doc.text("Guarda Civil Metropolitana de Porto Alegre",45, 48);
+    //doc.text("texto", distancia da esquerda da página, distancia do topo da página)
+    doc.setFontSize(24);
+    doc.text("Cautela nº "+Date.parse(obj.loan.removal), 50, 70);
+    doc.setFontSize(10);
+    doc.text("Guarda Municipal "+obj.gcm.name+" declara ter RECEBIDO do supervisor da Equipe de ", 20, 80);
+    doc.text("armamento e comunicação - EARC, o material abaixo discriminado:", 15, 87);
+    doc.text(" Marca: "+obj.equipment.brand, 15, 101);
+    doc.text(" Numero: "+obj.equipment.number, 60, 101);
+    doc.text(" Categoria: "+obj.equipment.category, 130, 101);
+    doc.text("", 15, 108);
+    doc.text("Declaro ter conhecimento e estar de acordo com as RESPONSABILIDADES DECORRENTES DA POSSE DO", 20, 115);
+    doc.text("DO EQUIPAMENTO descrito", 15, 122);
+    doc.text("Em conhecendo e subordinando-se às condições impostas pelo presente instrumento cabe ao detentor zelar ",15, 129);
+    doc.text("pela conservação do equipamento sob sua posse", 15, 136);
+ 
+    doc.text("Retirado equipamento no dia: "+(obj.loan.removal).toLocaleString("pt-br"),50, 160);
+    doc.text("Devolvido equipamento no dia: "+(obj.loan.devolution).toLocaleString("pt-br"),50, 167);
+    doc.text("Essa cautela foi gerada automaticamente mediante uso de SENHA e aproximação de CRACHÁ para identificação", 15, 208)
+    // Set the document to automatically print via JS
+    //doc.autoPrint();
+    doc.save('CautelaPDF.pdf');
+}
+
 async function getEquipamentos(){
+    const obj = {
+        gcm : {
+            name: "Nome GCM",
+            number:"numero GCM",
+            cpf: "CPF GCM",
+            email: "email GCM"
+        },
+        equipment:{
+            brand: "Marca equipamento",
+            number: "Numero equipamento",
+            category:" categoria equipamento"
+        },
+        loan:{
+            devolution:"devolução emprestimo",
+            removal: "retirada emprestimo"
+        }
+    }
+    console.log("pegar dados GCM: ");
+    const responseGcm = await fetch(dominio+'/gcm/'+params, config);
+    const dadosGcm = await responseGcm.json();
+    console.log(dadosGcm);
+
     const clean = document.querySelector("#new-container");
     clean.innerHTML="";  //limpa guia equipamentos
-    const response = await fetch(dominio+'/loan/gcm_id/'+params, config)
-    const dados = await response.json();
-    console.log(dados);
+    //Recupera dados de empréstimo
+    console.log("pegar dados empréstimo: ");
+    const responseLoan = await fetch(dominio+'/loan/gcm_id/'+params, config)
+    const dados = await responseLoan.json();
+
     dados.forEach(item => {
+        console.log(item);
+        console.log("pegar dados equipamento: ")
+
         const newContainer = document.getElementById('new-container');
         const course = document.createElement('div');
         const coursePreview = document.createElement('div');
@@ -176,15 +233,39 @@ async function getEquipamentos(){
         const h6_retira = document.createElement('div');
         const h6_devolve = document.createElement('div');
         const btn = document.createElement('a');
+        const linkCautela = document.createElement('a');
 
         course.setAttribute('class', 'course');
         coursePreview.setAttribute('class', 'course-preview');
         h6.setAttribute('class', 'name-princ');
         courseInfo.setAttribute('class', 'course-info');
         btn.setAttribute('class', 'btn-detalhes');
+        linkCautela.setAttribute('class', 'btn btn-link');
 
         btn.href = `/mostraequipamento.html?id=${item.id_equipment}#modal-opened`;
         btn.innerHTML = "Detalhes";
+
+        linkCautela.innerHTML = 'visualizar cautela';
+        //linkCautela.href = `javascript:geracaPdf()`;
+        linkCautela.onclick = ()=> {
+            fetch(dominio+'/equipment/'+item.id_equipment, config)
+                .then((repostaEquip) => repostaEquip.json())
+                .then((equipamento) => {
+                    console.log(equipamento);
+                    obj.gcm.name = dadosGcm.nome;
+                    obj.equipment.number = equipamento.number;
+                    obj.equipment.brand = equipamento.brand;
+                    obj.equipment.category = equipamento.category;
+                    obj.loan.removal = new Date(item.removal)
+                    if(item.devolution!=null){
+                        obj.loan.devolution = new Date(item.devolution);
+                    }
+                    else 
+                        obj.loan.devolution = "--------------------";
+                    geracaPdf(obj);
+                });
+        };
+
         //formando data e hora de emprestimo
         let dataHoraRemoval = new Date(item.removal);
         let dataRemoval = ((dataHoraRemoval.getDate() )) + "/" + ((dataHoraRemoval.getMonth() + 1)) + "/" + dataHoraRemoval.getFullYear();
@@ -199,8 +280,8 @@ async function getEquipamentos(){
             horaDevolve = "";
         }else{
 
-        dataDevolve = ((dataHoraDevolution.getDate() )) + "/" + ((dataHoraDevolution.getMonth() + 1)) + "/" + dataHoraDevolution.getFullYear();
-        horaDevolve = dataHoraDevolution.getHours()+":"+dataHoraDevolution.getMinutes();
+            dataDevolve = ((dataHoraDevolution.getDate() )) + "/" + ((dataHoraDevolution.getMonth() + 1)) + "/" + dataHoraDevolution.getFullYear();
+            horaDevolve = dataHoraDevolution.getHours()+":"+dataHoraDevolution.getMinutes();
         }
         console.log(dataDevolve);
         console.log(horaDevolve);
@@ -211,6 +292,7 @@ async function getEquipamentos(){
         courseInfo.appendChild(h6_retira);
         courseInfo.appendChild(h6_devolve);
         courseInfo.appendChild(btn);
+        courseInfo.appendChild(linkCautela);
         coursePreview.appendChild(h6);
         course.appendChild(coursePreview);
         course.appendChild(courseInfo);
