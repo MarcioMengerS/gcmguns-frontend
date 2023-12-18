@@ -1,5 +1,5 @@
-//const dominio = 'http://localhost:8080';//README
-const dominio = 'https://gcmsystem.up.railway.app';
+const dominio = 'http://localhost:8080';//README
+//const dominio = 'https://gcmsystem.up.railway.app';
 let config = { 
     headers: {'Authorization': 'Bearer ' + sessionStorage.getItem('token')}
 }

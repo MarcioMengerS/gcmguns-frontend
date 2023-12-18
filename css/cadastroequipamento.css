@@ -14,7 +14,11 @@ font-family: 'Montserrat', sans-serif;
 font-weight: 700;
 letter-spacing: 1.4px;
 }
-  
+
+option{
+    color: #194471;
+}
+
 .background {
 display: flex;
 min-height: 100vh;
@@ -106,10 +110,6 @@ font-size: 30px;
 margin-bottom: 15px;
 }
   
-.app-form-group.message {
-margin-top: 40px;
-}
-  
 .app-form-group.buttons {
 margin-bottom: 0;
 text-align: right;
@@ -158,7 +158,7 @@ box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6);
 background: #B0E0E6;
 color: #000;
 }
-  
+
 @media screen and (max-width: 520px) {
     .screen-body {
         flex-direction: column;

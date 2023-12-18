@@ -8,7 +8,6 @@
     <title> Castastro Equipamento</title>
 </head>
 <body>
-    <a href="/listaequipamentos.html">Lista de Equipamentos</a>
     <div class="background">
         <div class="container">
             <div class="screen">
@@ -27,34 +26,116 @@
                 <div class="screen-body">
                     <div class="screen-body-item left">
                         <div class="app-title">
-                            <span>Cadastro Equipamento - SAC</span>
+                            <span>Cadastro Equipamento - EARC</span>
                         </div>
                     </div>
                     <div class="screen-body-item">
                         <div class="app-form-group">
-                            <select class="app-form-control" id="category">
-                                <option value="" disabled selected>CATEGORIA</option>
-                                <option value="COLETE">COLETE BALÍSTICO</option>
-                                <option value="ALGEMA">ALGEMA</option>
-                                <option value="ARMA_LETAL">ARMA LETAL</option>
-                                <option value="ARMA_MENOS_LETAL">ARMA MENOS LETAL</option>
-                                <option value="ESPARGIDOR">ESPARGIDOR</option>
-                                <option value="MUNICAO">MUNIÇÃO</option>
-                                <option value="GRANADA">GRANADA</option>
-                                <option value="LANCADOR">LANÇADOR</option>
-                                <option value="MUNICAO">RÁDIO COMUNICADOR</option>
-                                <option value="LANTERNA">LANTERNA</option>
-                                <option value="BASTAO">BASTÃO</option>
+                            <select class="app-form-control" id="category" onchange="exibirItens()">
+                                <option value="" selected>SELECIONE UMA DAS CATEGORIAS</option>
+                                <option value="COLETE">Colete Balístico</option>
+                                <option value="ALGEMA">Algema</option>
+                                <option value="ARMA_LETAL">Arma letal</option>
+                                <option value="ARMA_MENOS_LETAL">Arma menos letal</option>
+                                <option value="ESPARGIDOR">Espargidor</option>
+                                <option value="MUNICAO">Munição</option>
+                                <option value="GRANADA">Granada</option>
+                                <option value="LANCADOR">Lançador</option>
+                                <option value="RADIO_COMUNICADOR">Rádio comunicador - HT</option>
+                                <option value="LANTERNA">Lanterna</option>
+                                <option value="BASTAO">Bastão</option>
                             </select>
                         </div>
-                        <div class="app-form-group">
-                            <input class="app-form-control" placeholder="Marca" type="text" id="brand">
-                        </div>
-                        <div class="app-form-group">
-                            <input class="app-form-control" placeholder="Número do Registro" type="number" id="number">
-                        </div>
-                        <div class="app-form-group">
-                            <input class="app-form-control" placeholder="Calibre" type="text" id="calibre">
+                        <!-- Lista completa de itens -->
+                        <div id="itens">
+                            <div class="app-form-group ARMA_LETAL">
+                                <select class="app-form-control" id="caliber">
+                                    <option value="" selected>Selecione o Calibre</option>
+                                    <option value="NOVE_MM">Calibre 9mm</option>
+                                    <option value="DOZE">Calibre 12</option>
+                                    <option value="TREZENTOS_OITENTA">Calibre 380</option>
+                                </select>
+                            </div>
+                            <div class="app-form-group COLETE">
+                                <select class="app-form-control" id="wear">
+                                    <option value="" selected>Tipo de Porte</option>
+                                    <option value="OSTENSIVO">Ostensivo</option>
+                                    <option value="VELADO">Velado</option>
+                                </select>
+                            </div>
+                            <div class="app-form-group COLETE">
+                                <select class="app-form-control" id="levelOfProtection">
+                                    <option value="" selected>Nível de Proteção</option>
+                                    <option value="II">II</option>
+                                    <option value="IIA">IIA</option>
+                                    <option value="IIIA">IIIA</option>
+                                </select>
+                            </div>
+                            <div class="app-form-group COLETE">
+                                <select class="app-form-control" id="gender">
+                                    <option value="" selected>Gênero</option>
+                                    <option value="MASCULINO">Masculino</option>
+                                    <option value="FEMININO">Feminino</option>
+                                </select>
+                            </div>
+                            <div class="app-form-group COLETE ESPARGIDOR">
+                                <select class="app-form-control" id="size">
+                                    <option value="" selected>Tamanho</option>
+                                    <option value="PP">Extra pequeno (PP)</option>
+                                    <option value="P">Pequeno (P)</option>
+                                    <option value="M">Medio (M)</option>
+                                    <option value="G">Grande (G)</option>
+                                    <option value="GG">Extra Grande (GG)</option>
+                                    <option value="EXGG">Extra Extra Grande (EXGG)</option>
+                                </select>
+                            </div>
+                            <div class="app-form-group COLETE ESPARGIDOR">
+                                <label>Data de Validade</label> 
+                                <input class="app-form-control" placeholder="Data de Validade" type="date" id="expirationDate">
+                            </div>
+                            <div class="app-form-group COLETE">
+                                <label>Data de Fabricação</label> 
+                                <input class="app-form-control" placeholder="Data de Fabricação" type="date" id="manufacturingDate">
+                            </div>
+                            <div class="app-form-group ARMA_LETAL">
+                                <input class="app-form-control" placeholder="Nº do Registro" type="number" id="register">
+                            </div>
+                            <div class="app-form-group ARMA_LETAL COLETE ALGEMA LANCADOR">
+                                <input class="app-form-control" placeholder="Nº de Série" type="text" id="number">
+                            </div>
+                            <div class="app-form-group ALGEMA ARMA_LETAL COLETE ARMA_MENOS_LETAL LANCADOR RADIO_COMUNICADOR">
+                                <input class="app-form-control" placeholder="Nº de Patrimônio" type="number" id="assetNumber">
+                            </div>
+                            <div class="app-form-group ARMA_LETAL">
+                                <input class="app-form-control" placeholder="Espécie" type="text" id="especie">
+                            </div>
+                            <div class="app-form-group ARMA_LETAL COLETE ALGEMA ARMA_MENOS_LETAL ESPARGIDOR LANCADOR RADIO_COMUNICADOR LANTERNA">
+                                <input class="app-form-control" placeholder="Marca" type="text" id="brand">
+                            </div>
+                            <div class="app-form-group ARMA_LETAL COLETE ALGEMA ESPARGIDOR LANCADOR RADIO_COMUNICADOR LANTERNA">
+                                <input class="app-form-control" placeholder="Modelo" type="text" id="model">
+                            </div>
+                            <div class="app-form-group ARMA_LETAL">
+                                <input class="app-form-control" placeholder="Funcionamento" type="text" id="operation">
+                            </div>
+                            <div class="app-form-group ARMA_LETAL">
+                                <input class="app-form-control" placeholder="Quantidade de Canos" type="text" id="numberOfPipes">
+                            </div>
+                            <div class="app-form-group ARMA_LETAL">
+                                <input class="app-form-control" placeholder="Tipo de Alma" type="text" id="soulInformation">
+                            </div>
+                            <div class="app-form-group ESPARGIDOR">
+                                <input class="app-form-control" placeholder="Distância do jato" type="text" id="distance">
+                            </div>
+                            <div class="app-form-group ESPARGIDOR">
+                                <input class="app-form-control" placeholder="Sistema de Jato" type="text" id="jetSystem">
+                            </div>
+                            <div class="app-form-group ESPARGIDOR">
+                                <input class="app-form-control" placeholder="Tipo de agente" type="text" id="agent">
+                            </div>
+                            <div class="app-form-group ALGEMA ARMA_LETAL COLETE ARMA_MENOS_LETAL ESPARGIDOR MUNICAO GRANADA LANCADOR RADIO_COMUNICADOR LANTERNA BASTAO">
+                                <textarea class="app-form-control" placeholder="Informações adicionais" id="info" rows=3 cols="10"></textarea>
+                            </div>
                         </div>
                         <div class="app-form-group buttons">
                             <a href="/listaequipamentos.html"><button class="app-form-button">CANCELAR</button></a>
@@ -65,6 +146,7 @@
             </div>
         </div>
     </div>
+    <script src="/js/selecionaitens.js"></script>
     <script src="/js/cadastroequipamento.js"></script>
 </body>
 </html>
