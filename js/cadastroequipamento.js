@@ -28,7 +28,7 @@ async function cadastroEquipamento(){
     agent: agente.value,
     assetNumber: Number(patrimonio.value),
     brand: marca.value,
-    calibre: calibre.value,
+    caliber: calibre.value,
     category: categoria.value,
     distance: distancia.value,
     expirationDate: validade.value,
