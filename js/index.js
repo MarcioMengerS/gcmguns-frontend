@@ -7,7 +7,7 @@ let config = {
 axios.get(dominio+'/gcm/total', config)
     .then(response => {totalGcm.textContent = JSON.stringify(response.data)})
     .catch(function(error){
-        console.log("Erro "+error.response.status+": "+error.response.data)
+        console.log("Erro "+error.response.status+": "+error.response.data);
         window.location.href = "/login.html";
     }
 )
@@ -16,7 +16,7 @@ axios.get(dominio+'/equipment/total', config)
     .then(response => {totalEquip.textContent = JSON.stringify(response.data)})
     .catch(function(error){
         console.log("Busca total equipamentos falhou. Motivo:")
-        console.log("Erro "+error.response.status+": "+error.response.data)
+        console.log("Erro "+error.response.status+": "+error.response.data);
         window.location.href = "/login.html";
     }
 )
