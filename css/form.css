@@ -1,3 +1,18 @@
+body{
+    background: linear-gradient(to right, #232427 100%, #194471 0%);
+
+}
+
 .card{
-    width:500px !important;
+    width:70% !important;
+    border: none !important;
+    box-shadow: 0 6px 12px 0 rgba(30, 85, 168, 0.5)
+}
+img{
+    width: auto;
+    height: 55px;
+}
+.inline{
+    display: grid;
+    grid-template-columns: 18fr 3fr;
 }

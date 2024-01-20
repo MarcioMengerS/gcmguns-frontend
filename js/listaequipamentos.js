@@ -61,12 +61,12 @@ async function getAllEquip(endpoint){
 
         const edit_btn = document.createElement("a");
         edit_btn.setAttribute("class", "btn btn-success");
-        edit_btn.setAttribute("href", `/modificaequipamento.html`);
+        edit_btn.setAttribute("href", `/editarequipamento.html?eqId=${post.id}`);
         edit_btn.setAttribute("role", "button");
         edit_btn.innerText = "Editar";
 
         h5_title.innerHTML = "Marca "+ post.brand;
-        p_text.innerText = "Número: "+post.number+" Modelo: "+post.model;
+        p_text.innerText = "Número: "+post.serialNumber+" Modelo: "+post.model;
 
         div_body.appendChild(h5_title);
         div_body.appendChild(p_text);
