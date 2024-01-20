@@ -13,7 +13,7 @@ async function carregarGCM() {
         const response = await fetch(dominio+'/gcm/'+params, config);
         const objeto = await response.json();
         console.log(objeto);
-const nome = document.getElementById('nome');
+        const nome = document.getElementById('nome');
         const numero = document.getElementById('numero');
         const cpf = document.getElementById('cpf');
         const dataAds = document.getElementById('data-ads');

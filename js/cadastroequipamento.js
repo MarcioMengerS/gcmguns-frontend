@@ -1,5 +1,4 @@
 const dominio = 'http://localhost:8080';//README
-//const dominio = 'https://gcmsystem.up.railway.app';
 
 async function cadastroEquipamento(){
   const agente = document.getElementById("agent");
@@ -15,12 +14,10 @@ async function cadastroEquipamento(){
   const protecao = document.getElementById("levelOfProtection");
   const fabricacao = document.getElementById("manufacturingDate");
   const modelo = document.getElementById("model");
-  const numero = document.getElementById("number");
-  const canos = document.getElementById("numberOfPipes");
+  const serial = document.getElementById("serialNumber");
   const funcionamento = document.getElementById("operation");
   const registro = document.getElementById("register");
   const tamanho = document.getElementById("size");
-  const alma = document.getElementById("soulInformation");
   const especie = document.getElementById("especie");
   const uso = document.getElementById("wear");
 
@@ -38,12 +35,10 @@ async function cadastroEquipamento(){
     levelOfProtection: protecao.value,
     manufacturingDate: fabricacao.value,
     model: modelo.value,
-    number: numero.value,
-    numberOfPipes: canos.value,
+    serialNumber: serial.value,
     operation: funcionamento.value,
     register: Number(registro.value),
     size: tamanho.value,
-    soulInformation: alma.value,
     specie: especie.value,
     wear: uso.value
   }
@@ -56,7 +51,6 @@ async function cadastroEquipamento(){
     headers: myHeaders,
     body: JSON.stringify(equipment)
   }
-
   await fetch(dominio+'/equipment', init);
   //Link serve para voltar a página de Listar EQUIPAMENTO
   window.location.href = "/listaequipamentos.html";
