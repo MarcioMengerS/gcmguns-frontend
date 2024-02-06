@@ -13,39 +13,39 @@
         <div class="px-4">
           <form class="row g-3">
             <div class="inline">
-              <h1 class="display-6" id="category">CATEGORIA</h1>
+              <h1 class="display-6" name="category" id="category">CATEGORIA</h1>
               <img alt="Categoria Equipamento">
             </div>
             <hr>
             <div class="col-md-3">
               <label for="brand" class="form-label">Marca</label>
-              <input type="text" class="form-control" id="brand">
+              <input type="text" class="form-control" name="brand" id="brand">
             </div>
             <div class="col-md-3">
               <label for="model" class="form-label">Modelo</label>
-              <input type="text" class="form-control" id="model">
+              <input type="text" class="form-control" name="model" id="model">
             </div>
             <div class="col-md-3" id="campo-serialNumber">
               <label for="serialNumber" class="form-label">Série</label>
-              <input type="text" class="form-control" id="serialNumber">
+              <input type="text" class="form-control" name="serialNumber" id="serialNumber">
             </div>
             <div class="col-md-3" id="campo-assetNumber">
               <label for="assetNumber" class="form-label">Patrimônio</label>
-              <input type="number" class="form-control" id="assetNumber">
+              <input type="number" class="form-control" name="assetNumber" id="assetNumber">
             </div>
             <div class="col-md-3" id="campo-specie">
               <label for="specie" class="form-label">Espécie</label>
-              <input type="text" class="form-control" id="specie">
+              <input type="text" class="form-control" name="specie" id="specie">
             </div>
 
             <div class="col-md-3" id="campo-register">
               <label for="register" class="form-label">Registro</label>
-              <input type="number" class="form-control" id="register">
+              <input type="number" class="form-control" name="register" id="register">
             </div>
 
             <div class="col-md-2" id="campo-caliber">
               <label for="caliber" class="form-label">Calibre</label>
-              <select id="caliber" class="form-select">
+              <select name="caliber" id="caliber" class="form-select">
                 <option value="VAZIO"></option>
                 <option value="DOZE">12</option>
                 <option value="NOVE_MM">9mm</option>
@@ -54,7 +54,7 @@
             </div>
             <div class="col-md-3" id="campo-wear">
               <label for="wear" class="form-label">Porte</label>
-              <select id="wear" class="form-select">
+              <select name="wear" id="wear" class="form-select">
                 <option value="VAZIO"></option>
                 <option value="OSTENSIVO">Ostensivo</option>
                 <option value="VELADO">Velado</option>
@@ -62,11 +62,11 @@
             </div>
             <div class="col-md-4" id="campo-operation">
               <label for="operation" class="form-label">Funcionamento</label>
-              <input type="text" class="form-control" id="operation">
+              <input type="text" class="form-control" name="operation" id="operation">
             </div>
             <div class="col-md-3" id="campo-gender">
               <label for="gender" class="form-label">Gênero</label>
-              <select id="gender" class="form-select">
+              <select name="gender" id="gender" class="form-select">
                 <option value="VAZIO"></option>
                 <option value="MASCULINO">Masculino</option>
                 <option value="FEMININO">Feminino</option>
@@ -74,7 +74,7 @@
             </div>
             <div class="col-md-3" id="campo-size">
               <label for="size" class="form-label">Tamanho</label>
-              <select id="size" class="form-select">
+              <select name="size" id="size" class="form-select">
                 <option value="VAZIO"></option>
                 <option value="PP">(PP) Extra pequeno</option>
                 <option value="P">(P) Pequeno</option>
@@ -86,7 +86,7 @@
             </div>
             <div class="col-md-3" id="campo-levelOfProtection">
               <label for="levelOfProtection" class="form-label">Proteção</label>
-              <select id="levelOfProtection" class="form-select">
+              <select name="levelOfProtection" id="levelOfProtection" class="form-select">
                 <option value="VAZIO"></option>
                 <option value="II">II</option>
                 <option value="IIA">IIA</option>
@@ -95,30 +95,30 @@
             </div>
             <div class="col-md-2" id="campo-distance">
               <label for="distance" class="form-label">Distância(m)</label>
-              <input type="text" class="form-control" id="distance">
+              <input type="text" class="form-control" name="distance" id="distance">
             </div>
             <div class="col-md-3" id="campo-jetSystem">
               <label for="jetSystem" class="form-label">Sistema de Jato</label>
-              <input type="text" class="form-control" id="jetSystem">
+              <input type="text" class="form-control" name="jetSystem" id="jetSystem">
             </div>
             <div class="col-md-3" id="campo-agent">
               <label for="agent" class="form-label">Agente Impregnante</label>
-              <input type="text" class="form-control" id="agent">
+              <input type="text" class="form-control" name="agent" id="agent">
             </div>
             <div class="col-md-6" id="campo-manufaturing">
               <label for="manufacturingDate" class="form-label">Data de Fabricação</label>
-              <input type="date" class="form-control" id="manufacturingDate" placeholder="1234 Main St">
+              <input type="date" class="form-control" name="manufacturingDate" id="manufacturingDate" placeholder="1234 Main St">
             </div>
             <div class="col-md-6" id="campo-expiration">
               <label for="expirationDate" class="form-label">Data de Validade</label>
-              <input type="date" class="form-control" id="expirationDate" placeholder="1234 Main St">
+              <input type="date" class="form-control" name="expirationDate" id="expirationDate" placeholder="1234 Main St">
             </div>
             <div class="col-mb-3">
               <label for="info" class="form-label">Informações complementares</label>
-              <textarea class="form-control" id="info" rows="3"></textarea>
+              <textarea class="form-control" name="info" id="info" rows="3"></textarea>
             </div>
             <div class="col-12">
-              <button type="button" onclick="mostraEquipamento()" class="btn btn-success">Salvar</button>
+              <button type="submit" class="btn btn-success">Salvar</button>
               <a class="btn btn-primary" href="/listaequipamentos.html" role="button">Voltar</a>
             </div>
           </form>
