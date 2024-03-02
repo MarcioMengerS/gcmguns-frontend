@@ -20,6 +20,7 @@ async function enviaLogin(){
     //armazenando token session do navegador
     response.text().then(token => sessionStorage.setItem('token',token));
     location.href = "/index.html";
+    // location.href = "/index.html";
   }else{
     alert("usuário ou senha inválido!");
     //Limpa campos de login e senha
